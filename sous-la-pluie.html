@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sous la pluie - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-green: #2d5016;
+            --accent-orange: #FF8C00;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        /* TABS */
+        .tabs-wrapper {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 64px;
+            z-index: 99;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tabs {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab {
+            background: none;
+            border: 1.5px solid #ddd;
+            color: var(--text-dark);
+            padding: 7px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .tab:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
+        .tab.active {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        /* ACTIVITY CARD */
+        .activity { display: none; }
+        .activity.active { display: block; }
+
+        .activity-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            margin-bottom: 20px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+        }
+        .activity-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        .activity-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .activity-desc ul {
+            margin: 10px 0 10px 20px;
+        }
+        .activity-desc li {
+            margin-bottom: 4px;
+        }
+
+        /* CTA BUTTON */
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: white;
+            padding: 11px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+            border: 2px solid var(--accent-orange);
+        }
+        .cta-button:hover { background: transparent; color: var(--accent-orange); }
+
+        /* INFO BLOCK */
+        .info-block {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            overflow: hidden;
+        }
+        .info-row {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            background: #f0f8ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .info-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .info-value a { color: var(--primary-blue); text-decoration: none; }
+        .info-value a:hover { text-decoration: underline; }
+        .closed { color: #e74c3c; }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+        footer p { margin-bottom: 8px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a class="back-button" href="index.html">←</a>
+            <h1>🌧️ Journée sous la pluie</h1>
+        </div>
+    </header>
+
+    <div class="tabs-wrapper">
+        <div class="tabs">
+            <button class="tab active"  onclick="showActivity(0)">Grotte du Cerdon</button>
+            <button class="tab"         onclick="showActivity(1)">Le 10.55</button>
+            <button class="tab"         onclick="showActivity(2)">Fort des Rousses</button>
+            <button class="tab"         onclick="showActivity(3)">Spa Thermal</button>
+            <button class="tab"         onclick="showActivity(4)">Cinéma Atmosphère</button>
+            <button class="tab"         onclick="showActivity(5)">Cuivrerie de Cerdon</button>
+            <button class="tab"         onclick="showActivity(6)">Laser Game</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- 1. GROTTE DU CERDON -->
+        <div class="activity active" id="act-0">
+            <div class="activity-image">🦇</div>
+            <div class="activity-name">Grotte du Cerdon</div>
+            <div class="activity-desc">
+                <p>Durée de la visite : de 45 minutes à 1h30 — Activités préhistoriques</p>
+            </div>
+            <a href="https://www.grottesducerdon.fr" target="_blank" class="cta-button">Découvrir les Grottes du Cerdon</a>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : 10€ (visite) / 17€ (visite + activités)<br>
+                            Enfant : 7€ (visite) / 16€ (visite + activités)<br>
+                            Enfant de moins de 4 ans : gratuit
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">
+                            <a href="https://maps.google.com/?q=01450+Labalme+France" target="_blank">01450 Labalme, France</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🚗</div>
+                    <div class="info-content">
+                        <div class="info-label">Trajet</div>
+                        <div class="info-value">Situé à 20 minutes du camping en voiture</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💡</div>
+                    <div class="info-content">
+                        <div class="info-label">Conseils</div>
+                        <div class="info-value">
+                            Réservation sur le site internet<br>
+                            Animaux autorisés en laisse et portés dans la grotte
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Du 14 avril au 31 octobre 2025</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value"><a href="tel:0474373679">04 74 37 36 79</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. LE 10.55 -->
+        <div class="activity" id="act-1">
+            <div class="activity-image">🎳</div>
+            <div class="activity-name">Le 10.55</div>
+            <div class="activity-desc">
+                <p>Complexe de loisirs et restaurant 7j/7 : bowling, Kid Park géant, parcours gonflable, trampoline park, Virtual Park (VR), Laser Game, jeux d'arcades et billards.</p>
+                <p style="margin-top:8px">La Brasserie est ouverte midi et soir avec une cuisine de qualité à base de produits frais et locaux.</p>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">152 cours de Verdun, Oyonnax</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🚗</div>
+                    <div class="info-content">
+                        <div class="info-label">Trajet</div>
+                        <div class="info-value">Situé à 20 minutes du camping en voiture</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Tous les jours</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="http://www.1055.fr/oyonnax/" target="_blank">1055.fr/oyonnax</a></div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value"><a href="tel:0485581055">04 85 58 10 55</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. FORT DES ROUSSES -->
+        <div class="activity" id="act-2">
+            <div class="activity-image">🧀</div>
+            <div class="activity-name">Le Fort des Rousses</div>
+            <div class="activity-desc">
+                <p>Envie d'évasion malgré la météo ? Direction le Fort des Rousses, 100% à l'abri, idéal pour une journée pluvieuse ! Ancienne forteresse militaire nichée dans les montagnes du Jura.</p>
+                <ul style="margin-top:8px">
+                    <li>🧀 Visite guidée passionnante</li>
+                    <li>🧀 Dégustation de comté possible</li>
+                    <li>👨‍👩‍👧 Adapté à toute la famille</li>
+                    <li>☂️ 100% à l'abri : parfait pour les jours de pluie</li>
+                </ul>
+            </div>
+            <a href="https://www.fort-des-rousses.com" target="_blank" class="cta-button">Billetterie en ligne</a>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">
+                            <a href="https://maps.google.com/?q=Le+Fort+des+Rousses+39220+Les+Rousses" target="_blank">Le Fort des Rousses, 39220 Les Rousses</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🚗</div>
+                    <div class="info-content">
+                        <div class="info-label">Trajet</div>
+                        <div class="info-value">⏱️ ~1h depuis le camping — Durée de la visite : 1h30 à 2h</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💡</div>
+                    <div class="info-content">
+                        <div class="info-label">Conseils</div>
+                        <div class="info-value">Réservation conseillée. Prévoir une petite laine : il fait frais dans les caves !</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value"><a href="tel:0384600226">03 84 60 02 26</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. SPA THERMAL -->
+        <div class="activity" id="act-3">
+            <div class="activity-image">♨️</div>
+            <div class="activity-name">Spa Thermal</div>
+            <div class="activity-desc">
+                <p>Espace bien-être avec piscines thermales, hammam, sauna et soins relaxants. Parfait pour se détendre pendant que la pluie tombe dehors !</p>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">
+                            <a href="https://maps.google.com/?q=Lons-le-Saunier+France" target="_blank">Lons-le-Saunier, France</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🚗</div>
+                    <div class="info-content">
+                        <div class="info-label">Trajet</div>
+                        <div class="info-value">⏱️ 1h10 depuis le camping — Durée : 2h à ½ journée</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💡</div>
+                    <div class="info-content">
+                        <div class="info-label">Conseils</div>
+                        <div class="info-value">💡 Prévoyer votre maillot de bain et serviette. Accès interdit aux enfants.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Horaires</div>
+                        <div class="info-value">
+                            Lundi au vendredi : 10h00 - 19h00<br>
+                            Samedi : 9h00 - 19h00<br>
+                            Dimanche et jours fériés : 9h00 - 13h00
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value">
+                            <a href="https://www.valvital.fr/Nos-stations-thermales/Lons-le-Saunier-Station-thermale-de-Lons-le-Saunier" target="_blank">valvital.fr</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. CINÉMA ATMOSPHÈRE -->
+        <div class="activity" id="act-4">
+            <div class="activity-image">🎬</div>
+            <div class="activity-name">Cinéma Atmosphère</div>
+            <div class="activity-desc">
+                <p>Complexe de 3 salles (248, 148 et 80 fauteuils). Des séances en 3D programmées chaque semaine. Salles accessibles aux personnes à mobilité réduite.</p>
+            </div>
+            <a href="https://www.cinema-oyonnax.fr" target="_blank" class="cta-button">Découvrir la programmation</a>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : 8,20 €<br>
+                            Enfant : 4,50 € (moins de 16 ans)<br>
+                            Tarif réduit : 6,70 €
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">
+                            <a href="https://maps.google.com/?q=Parc+Jeantet+01100+Oyonnax" target="_blank">Parc Jeantet, 01100 Oyonnax</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🚗</div>
+                    <div class="info-content">
+                        <div class="info-label">Trajet</div>
+                        <div class="info-value">Situé à 20 minutes du camping en voiture</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value"><a href="tel:0474819688">04 74 81 96 88</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. CUIVRERIE DE CERDON -->
+        <div class="activity" id="act-5">
+            <div class="activity-image">🔨</div>
+            <div class="activity-name">La Cuivrerie de Cerdon</div>
+            <div class="activity-desc">
+                <p>Ancienne fabrique d'articles de cuivre et maillochort, transformée en musée de découverte économique relatif au travail du cuivre, situé à Cerdon dans le département de l'Ain.</p>
+            </div>
+            <a href="http://patrimoines.ain.fr/n/c/cuivrerie-de-cerdon/n" target="_blank" class="cta-button">Billetterie en ligne</a>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">🕐</div>
+                    <div class="info-content">
+                        <div class="info-label">Ouverture</div>
+                        <div class="info-value">De 10h00 à 18h00</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : 9€<br>
+                            Enfant : 6€<br>
+                            Pack famille (2 adultes, 2 enfants) : 25€
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">
+                            <a href="https://maps.google.com/?q=Rue+de+la+Cuivrerie+01450+Cerdon" target="_blank">Rue de la Cuivrerie, 01450 Cerdon</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🚗</div>
+                    <div class="info-content">
+                        <div class="info-label">Trajet</div>
+                        <div class="info-value">Situé à 35 minutes du camping en voiture</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value"><span class="closed">Fermé le lundi</span> — Tous les autres jours</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value">
+                            <a href="http://patrimoines.ain.fr/n/c/cuivrerie-de-cerdon/n" target="_blank">patrimoines.ain.fr</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value"><a href="tel:0469191150">04 69 19 11 50</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. LASER GAME -->
+        <div class="activity" id="act-6">
+            <div class="activity-image">🔫</div>
+            <div class="activity-name">Laser Game</div>
+            <div class="activity-desc">
+                <p>À partir de 7 ans — 1,20m minimum requis.</p>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">🕐</div>
+                    <div class="info-content">
+                        <div class="info-label">Ouverture</div>
+                        <div class="info-value">
+                            <span class="closed">Lundi : Fermé</span><br>
+                            Mardi : 14:00 - 23:00<br>
+                            Mercredi : 14:00 - 23:00<br>
+                            Jeudi : 14:00 - 23:00<br>
+                            Vendredi : 14:00 - 1:00<br>
+                            Samedi : 14:00 - 1:00<br>
+                            Dimanche : 14:00 - 20:00
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            1ère partie (20 min) : 9€ / personne<br>
+                            2ème partie (20 min) : 6€ / personne<br>
+                            3ème partie (20 min) : 5€ / personne<br>
+                            45 min non stop : 15€ / personne
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">
+                            <a href="https://maps.google.com/?q=42+Rte+de+Dortan+01100+Oyonnax" target="_blank">42 Rte de Dortan, 01100 Oyonnax</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🚗</div>
+                    <div class="info-content">
+                        <div class="info-label">Trajet</div>
+                        <div class="info-value">Situé à 18 minutes du camping en voiture</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💡</div>
+                    <div class="info-content">
+                        <div class="info-label">Conseils</div>
+                        <div class="info-value">À partir de 7 ans — 1,20m minimum</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value">
+                            <a href="http://oyonnax.laserlander.com/" target="_blank">oyonnax.laserlander.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value"><a href="tel:0474755179">04 74 75 51 79</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+        <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+        <p style="margin-top:15px; opacity:0.8; font-size:12px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function showActivity(index) {
+            document.querySelectorAll('.activity').forEach(a => a.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('act-' + index).classList.add('active');
+            document.querySelectorAll('.tab')[index].classList.add('active');
+            document.querySelectorAll('.tab')[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
