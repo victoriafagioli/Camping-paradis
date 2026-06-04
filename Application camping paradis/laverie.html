@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laverie - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-green: #2d5016;
+            --accent-orange: #FF8C00;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+        header {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        header h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .detail-image {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+        .detail-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .detail-info h2 {
+            font-size: 28px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .detail-info p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-top: 4px solid var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        .info-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .info-item-icon {
+            color: var(--accent-orange);
+            font-weight: bold;
+            font-size: 18px;
+            min-width: 20px;
+        }
+        .info-item-content {
+            flex: 1;
+        }
+        .info-item-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+        .info-item-value {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+        footer {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="back-button" onclick="window.location.href='/'">←</button>
+            <h1>🧺 Laverie</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="detail-image">
+            <img src="/images/laverie.jpg" alt="Laverie">
+        </div>
+
+        <div class="detail-info">
+            <h2>Service de Laverie</h2>
+            <p>Vous trouverez des machines à laver au sanitaire principal.</p>
+            <p>Le paiement s'effectue directement sur les machines ou sur l'application WAshin téléchargeable sur Apple et Android.</p>
+            <p>La laverie est composée de deux machines à laver et d'un sèche-linge. Elle est ouverte 24h/24 pendant toute la saison.</p>
+            <p>Si vous souhaitez payer via l'application, il faudra vous créer un compte en précisant l'établissement dans lequel vous êtes et sélectionner le service souhaité (sèche-linge et/ou lavage)</p>
+            <p><strong>Avantage :</strong> tarif réduit via l'application.</p>
+        </div>
+
+        <div class="info-card">
+            <h3>⏰ Ouverture</h3>
+            <div class="info-item">
+                <div class="info-item-icon">🕐</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Horaires</div>
+                    <div class="info-item-value">Ouvert 7j/7 24h/24</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>📱 Conseils</h3>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Application WASHIN</div>
+                    <div class="info-item-value">Disponible sur Apple et Android</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Tarif réduit</div>
+                    <div class="info-item-value">Via l'application</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Paiement direct</div>
+                    <div class="info-item-value">Sur les machines disponibles</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+        <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+        <p style="margin-top: 15px; opacity: 0.8; font-size: 12px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
