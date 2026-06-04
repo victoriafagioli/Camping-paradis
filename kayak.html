@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayak - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-green: #2d5016;
+            --accent-orange: #FF8C00;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+        header {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        header h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .detail-image {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+        .detail-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .detail-info h2 {
+            font-size: 28px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .detail-info p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: white;
+            padding: 12px 35px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--accent-orange);
+            margin-top: 15px;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent-orange);
+        }
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-top: 4px solid var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        .info-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .info-item-icon {
+            color: var(--accent-orange);
+            font-weight: bold;
+            font-size: 18px;
+            min-width: 20px;
+        }
+        .info-item-content {
+            flex: 1;
+        }
+        .info-item-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+        .info-item-value {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+        footer {
+            background: var(--primary-green);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .detail-info h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="back-button" onclick="window.location.href='/'">←</button>
+            <h1>🚣 Kayak</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="detail-image">
+            <img src="/images/kayak.jpg" alt="Kayak">
+        </div>
+
+        <div class="detail-info">
+            <h2>Kayak</h2>
+            <p><strong>LOCATION DE KAYAK ET DE PADDLE EN LIBRE-SERVICE</strong></p>
+            <p>Réservez en ligne et oyez la liberté de payer où vous le souhaitez, quand vous souhaitez.</p>
+            <p>La station de kayak et de paddle est en bas du camping (juste devant le lac). Si vous rencontrez un problème lors de la location, contactez-nous !</p>
+            <a href="#contact" class="cta-button">Découvrir Kayakomat</a>
+        </div>
+
+        <div class="info-card">
+            <h3>💰 Prix</h3>
+            <div class="info-item">
+                <div class="info-item-icon">🚣</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Kayak 1 place</div>
+                    <div class="info-item-value">29€ (2h)</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">🚣</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Kayak 2 places</div>
+                    <div class="info-item-value">39€ (2h)</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">🏄</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Paddle</div>
+                    <div class="info-item-value">14.50€ (1h)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>📋 Conseils</h3>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Gilet obligatoire</div>
+                    <div class="info-item-value">Pour votre sécurité</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Ouvert 24/7</div>
+                    <div class="info-item-value">Accès libre</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Rangement inclus</div>
+                    <div class="info-item-value">Code par SMS</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Libre service</div>
+                    <div class="info-item-value">Payez seul !</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+        <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+        <p style="margin-top: 15px; opacity: 0.8; font-size: 12px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
