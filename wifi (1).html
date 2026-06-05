@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-green: #2d5016;
+            --accent-orange: #34BDEF;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+        header {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 6px;
+        }
+        header h1 { font-size: 28px; font-weight: 700; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .detail-icon {
+            width: 100%;
+            text-align: center;
+            font-size: 120px;
+            margin-bottom: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .detail-info h2 {
+            font-size: 28px;
+            color: var(--primary-blue);
+        }
+        .detail-info p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-top: 4px solid var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .info-item-icon {
+            color: var(--accent-orange);
+            font-weight: bold;
+            font-size: 18px;
+            min-width: 20px;
+        }
+        .info-item-content { flex: 1; }
+        .info-item-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+        .info-item-value {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+        footer {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer p { margin-bottom: 10px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="back-button" onclick="window.location.href='index.html'">←</button>
+            <h1>WiFi</h1>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="detail-info">
+            <h2>WiFi Gratuit</h2>
+            <p>Connexion internet gratuite et rapide partout dans le camping.</p>
+            <p>Restez connectés avec famille et amis durant votre séjour en pleine nature.</p>
+        </div>
+
+        <div class="info-card">
+            <h3>📋 Informations</h3>
+            <div class="info-item">
+                <div class="info-item-icon">📶</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Réseau</div>
+                    <div class="info-item-value">Camping-Paradis-WiFi</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">💰</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Tarif</div>
+                    <div class="info-item-value">Gratuit pour tous les clients</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">⏰</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Disponibilité</div>
+                    <div class="info-item-value">24h/24</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Couverture</div>
+                    <div class="info-item-value">Partout dans le camping</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>ℹ️ Conseils de Connexion</h3>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Code d'accès</div>
+                    <div class="info-item-value">Disponible à la réception</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Vitesse</div>
+                    <div class="info-item-value">Haut débit - Excellent pour streaming</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Support</div>
+                    <div class="info-item-value">Contactez la réception en cas de souci</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+        <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+        <p style="margin-top: 15px; opacity: 0.8; font-size: 12px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
