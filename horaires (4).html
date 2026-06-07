@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horaires - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-green: #2d5016;
+            --accent-orange: #FF8C00;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); line-height: 1.6; background: var(--bg-light); }
+
+        header { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,.15); position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 15px; }
+        .back-button { background: rgba(255,255,255,.2); border: none; color: white; font-size: 22px; cursor: pointer; padding: 8px 14px; border-radius: 6px; text-decoration: none; transition: background 0.3s; }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+
+        .horaire-tabs { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; background: white; padding: 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+        .horaire-tab { padding: 8px 18px; background: none; border: 1.5px solid #ddd; color: var(--text-dark); border-radius: 20px; cursor: pointer; font-weight: 500; font-size: 13px; transition: all .2s; font-family: 'Segoe UI', sans-serif; }
+        .horaire-tab:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
+        .horaire-tab.active { background: var(--primary-blue); border-color: var(--primary-blue); color: white; }
+
+        .horaire-content { display: none; }
+        .horaire-content.active { display: block; animation: fadeIn .3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .info-box { background: white; padding: 24px 28px; border-radius: 12px; border-left: 5px solid var(--primary-blue); box-shadow: 0 4px 15px rgba(0,0,0,.08); margin-bottom: 20px; }
+        .info-box h3 { color: var(--primary-blue); margin-bottom: 12px; font-size: 18px; }
+        .info-box p { color: var(--text-light); font-size: 14px; line-height: 1.7; margin-bottom: 10px; }
+        .info-box p:last-child { margin-bottom: 0; }
+
+        .horaire-table { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,.08); margin-bottom: 20px; }
+        .horaire-header { background: linear-gradient(135deg, var(--primary-blue) 0%, #2a9ec4 100%); color: white; padding: 16px 20px; font-weight: 600; font-size: 14px; }
+        .horaire-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 16px 20px; border-bottom: 1px solid #f0f0f0; background: white; }
+        .horaire-row:last-child { border-bottom: none; }
+        .horaire-day { font-weight: 600; color: var(--primary-blue); font-size: 14px; }
+        .horaire-time { color: var(--text-light); font-size: 14px; }
+
+        footer { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 35px 20px; text-align: center; margin-top: 20px; }
+        footer p { margin-bottom: 8px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a class="back-button" href="index.html">←</a>
+        <h1>Horaires</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="horaire-tabs">
+        <button class="horaire-tab active" data-tab="reception">Réception</button>
+        <button class="horaire-tab" data-tab="snack">Snack</button>
+        <button class="horaire-tab" data-tab="bar">Bar</button>
+        <button class="horaire-tab" data-tab="aquatique">Espace Aquatique</button>
+    </div>
+
+    <!-- RÉCEPTION -->
+    <div id="tab-reception" class="horaire-content active">
+        <div class="info-box">
+            <h3>Réception</h3>
+            <p>Notre équipe est à votre disposition à l'accueil pour répondre à toutes vos questions !</p>
+        </div>
+        <div class="horaire-table">
+            <div class="horaire-header">Basse Saison (Mai, Juin, Septembre)</div>
+            <div class="horaire-row">
+                <div class="horaire-day">Dimanche - Vendredi</div>
+                <div class="horaire-time">9h00 - 12h00 | 15h00 - 18h00</div>
+            </div>
+            <div class="horaire-row">
+                <div class="horaire-day">Samedi</div>
+                <div class="horaire-time">9h00 - 12h00 | 14h00 - 18h00</div>
+            </div>
+        </div>
+        <div class="horaire-table">
+            <div class="horaire-header">Haute Saison (Juillet - Août)</div>
+            <div class="horaire-row">
+                <div class="horaire-day">Lundi - Vendredi</div>
+                <div class="horaire-time">9h00 - 12h00 | 15h00 - 19h00</div>
+            </div>
+            <div class="horaire-row">
+                <div class="horaire-day">Samedi &amp; Dimanche</div>
+                <div class="horaire-time">9h00 - 12h00 | 14h00 - 19h00</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SNACK -->
+    <div id="tab-snack" class="horaire-content">
+        <div class="info-box">
+            <h3>Snack</h3>
+            <p><strong>Services :</strong></p>
+            <p>Planche de charcuteries et de fromages | Commande à la carte du bar/snack sans réservation | Soirée à thème (sur réservation)</p>
+            <p style="margin-top:15px; color:var(--primary-blue); font-weight:600;">Du 15 mai au 31 août 2026</p>
+        </div>
+    </div>
+
+    <!-- BAR -->
+    <div id="tab-bar" class="horaire-content">
+        <div class="info-box">
+            <h3>Bar</h3>
+            <p><strong>Services :</strong></p>
+            <p>Cocktails à la carte | Boissons alcoolisées, soft, bières, vins | Vente de glaces | Dépôt de pain à partir de 8h00</p>
+            <p style="margin-top:12px;"><strong>Pain &amp; Viennoiseries :</strong> Commande au plus tard la veille avant 18h pour le lendemain</p>
+            <p style="margin-top:15px; color:var(--primary-blue); font-weight:600;">Du 15 mai au 31 août 2026</p>
+        </div>
+    </div>
+
+    <!-- ESPACE AQUATIQUE -->
+    <div id="tab-aquatique" class="horaire-content">
+        <div class="info-box">
+            <h3>Espace Aquatique</h3>
+            <p>Baignade surveillée l'après-midi uniquement en haute saison.</p>
+            <p style="margin-top:12px;"><strong>Horaires :</strong> De 10h00 à 19h00</p>
+            <p style="margin-top:8px;"><strong>Prix :</strong> Gratuit pour la clientèle du camping</p>
+            <p style="margin-top:12px;"><strong>Règles d'accès :</strong></p>
+            <p>- Bracelets obligatoires<br>- Short de bain interdit<br>- Chaussures à laisser à l'entrée avant le pédiluve<br>- Tongs autorisées</p>
+            <p style="margin-top:12px;"><strong>Info :</strong> Messieurs, vous avez oublié votre maillot de bain ? On en vend à la réception à 15€.</p>
+            <p style="margin-top:15px; color:var(--primary-blue); font-weight:600;">Du 30 mai au 15 septembre 2026</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+    <p>Ouverture : 30/04/2026 au 28/09/2026</p>
+    <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+    <p style="margin-top:20px; opacity:0.8; font-size:12px;">&copy; 2026 Tous droits réservés.</p>
+</footer>
+
+<script>
+    document.querySelectorAll('.horaire-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabName = tab.getAttribute('data-tab');
+            document.querySelectorAll('.horaire-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.horaire-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + tabName).classList.add('active');
+            tab.classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
