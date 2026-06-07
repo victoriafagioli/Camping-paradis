@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Véhicule électrique - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); line-height: 1.6; background: var(--bg-light); }
+
+        header { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 900px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 15px; }
+        .back-button { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 22px; cursor: pointer; padding: 8px 14px; border-radius: 6px; transition: background 0.3s; text-decoration: none; }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+
+        .text-block { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 28px; margin-bottom: 20px; }
+        .text-block h2 { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+        .text-block p { font-size: 14px; color: var(--text-light); line-height: 1.8; }
+
+        .info-block { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); overflow: hidden; margin-bottom: 20px; }
+        .info-row { display: flex; gap: 16px; align-items: flex-start; padding: 15px 20px; border-bottom: 1px solid #f0f0f0; }
+        .info-row:last-child { border-bottom: none; }
+        .info-icon { width: 36px; height: 36px; background: #f0f8ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+        .info-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #999; margin-bottom: 4px; }
+        .info-value { font-size: 14px; color: var(--text-dark); line-height: 1.6; }
+        .info-value a { color: var(--primary-blue); text-decoration: none; }
+        .info-value a:hover { text-decoration: underline; }
+
+        footer { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 35px 20px; text-align: center; }
+        footer p { margin-bottom: 8px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a class="back-button" href="index.html">←</a>
+        <h1>Véhicule électrique</h1>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="text-block">
+        <h2>Recharge à 15 minutes du Camping</h2>
+        <p>Si vous souhaitez recharger votre véhicule électrique, vous trouverez une borne de recharge à Oyonnax situé à 15 minutes du Camping.</p>
+    </div>
+
+    <div class="info-block">
+        <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div>
+                <div class="info-label">Localisation</div>
+                <div class="info-value">
+                    <a href="https://maps.google.com/?q=borne+recharge+électrique+Oyonnax" target="_blank">Oyonnax — à 15 minutes du camping</a>
+                </div>
+            </div>
+        </div>
+        <div class="info-row">
+            <div class="info-icon">🚗</div>
+            <div>
+                <div class="info-label">Trajet</div>
+                <div class="info-value">Environ 15 minutes en voiture</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+    <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+    <p style="margin-top:15px; opacity:0.8; font-size:12px;">&copy; 2026 Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>
