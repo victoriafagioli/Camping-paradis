@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Météo - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --text-dark: #333;
+            --text-light: #888;
+            --bg-light: #f4f6f8;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-light); color: var(--text-dark); }
+
+        /* HEADER */
+        header { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 960px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 15px; }
+        .back-button { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 22px; cursor: pointer; padding: 8px 14px; border-radius: 6px; transition: background 0.3s; text-decoration: none; }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        /* TOGGLE °C / °F */
+        .unit-toggle { margin-left: auto; display: flex; align-items: center; background: rgba(255,255,255,0.15); border-radius: 20px; overflow: hidden; }
+        .unit-btn { background: none; border: none; color: rgba(255,255,255,0.7); padding: 6px 14px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+        .unit-btn.active { background: white; color: var(--primary-blue); border-radius: 20px; }
+
+        /* LAYOUT */
+        .page { max-width: 960px; margin: 0 auto; padding: 30px 20px 60px; display: grid; grid-template-columns: 1fr 220px; gap: 24px; }
+        @media (max-width: 680px) { .page { grid-template-columns: 1fr; } }
+
+        /* MAIN PANEL */
+        .main-panel { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+        .location { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-light); margin-bottom: 4px; }
+        .date-label { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .current-temp-row { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+        .current-temp { font-size: 72px; font-weight: 200; line-height: 1; color: var(--text-dark); }
+        .current-temp sup { font-size: 28px; font-weight: 400; }
+        .current-icon { font-size: 52px; }
+        .current-desc { font-size: 15px; color: var(--text-light); margin-bottom: 28px; }
+
+        /* HOURLY */
+        .hourly-list { border-top: 1px solid #f0f0f0; margin-bottom: 28px; }
+        .hourly-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+        .hourly-time { font-size: 14px; color: var(--text-light); width: 55px; }
+        .hourly-temp { font-size: 15px; font-weight: 600; }
+        .hourly-icon { font-size: 18px; }
+
+        /* STATS */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+        .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; grid-column: 1 / -1; }
+        .stat-label { font-size: 13px; color: var(--text-dark); }
+        .stat-value { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+
+        /* 7-DAY PANEL */
+        .forecast-panel { display: flex; flex-direction: column; gap: 10px; }
+        .forecast-card { background: white; border-radius: 14px; padding: 14px 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
+        .forecast-card:hover { border-color: var(--primary-blue); }
+        .forecast-card.active { border-color: var(--primary-blue); background: #f0faff; }
+        .forecast-day { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-light); margin-bottom: 2px; }
+        .forecast-temps { display: flex; flex-direction: column; }
+        .forecast-max { font-size: 16px; font-weight: 700; }
+        .forecast-min { font-size: 12px; color: var(--text-light); }
+        .forecast-icon { font-size: 26px; }
+
+        .loading { text-align: center; padding: 60px 20px; color: var(--text-light); font-size: 15px; }
+        .error-msg { background: #fff3f3; border: 1px solid #fcc; border-radius: 10px; padding: 16px; color: #c00; font-size: 14px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a class="back-button" href="index.html">←</a>
+        <h1>Météo</h1>
+        <div class="unit-toggle">
+            <button class="unit-btn active" id="btn-c" onclick="setUnit('C')">°C</button>
+            <button class="unit-btn" id="btn-f" onclick="setUnit('F')">°F</button>
+        </div>
+    </div>
+</header>
+
+<div class="page" id="page-content">
+    <div class="loading" style="grid-column:1/-1">Chargement de la météo…</div>
+</div>
+
+<footer style="background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 35px 20px; text-align: center;">
+    <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+    <p>📞 <a href="tel:+33474768097" style="color:white">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr" style="color:white">info@camping-lesgorgesduhautbugey.fr</a></p>
+    <p style="margin-top:15px; opacity:0.8; font-size:12px;">&copy; 2026 Tous droits réservés.</p>
+</footer>
+
+<script>
+    // Coordonnées de Matafelon-Granges
+    const LAT = 46.177;
+    const LON = 5.539;
+    const LOCATION = "Matafelon-Granges, France";
+
+    let unit = 'C';
+    let weatherData = null;
+    let selectedDay = 0;
+
+    const WMO_ICONS = {
+        0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+        45: '🌫️', 48: '🌫️',
+        51: '🌦️', 53: '🌦️', 55: '🌧️',
+        61: '🌧️', 63: '🌧️', 65: '🌧️',
+        71: '🌨️', 73: '🌨️', 75: '❄️',
+        80: '🌦️', 81: '🌧️', 82: '⛈️',
+        95: '⛈️', 96: '⛈️', 99: '⛈️'
+    };
+
+    const WMO_DESC = {
+        0: 'Ensoleillé', 1: 'Principalement ensoleillé', 2: 'Partiellement nuageux', 3: 'Couvert',
+        45: 'Brouillard', 48: 'Brouillard givrant',
+        51: 'Bruine légère', 53: 'Bruine modérée', 55: 'Bruine dense',
+        61: 'Pluie légère', 63: 'Pluie modérée', 65: 'Pluie forte',
+        71: 'Neige légère', 73: 'Neige modérée', 75: 'Neige forte',
+        80: 'Averses légères', 81: 'Averses modérées', 82: 'Averses violentes',
+        95: 'Orage', 96: 'Orage avec grêle', 99: 'Orage violent'
+    };
+
+    const DAYS_FR = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    const MONTHS_FR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+    function toDisplay(c) {
+        if (unit === 'C') return Math.round(c) + '°';
+        return Math.round(c * 9/5 + 32) + '°';
+    }
+
+    function setUnit(u) {
+        unit = u;
+        document.getElementById('btn-c').classList.toggle('active', u === 'C');
+        document.getElementById('btn-f').classList.toggle('active', u === 'F');
+        if (weatherData) render();
+    }
+
+    function windDir(deg) {
+        const dirs = ['↑N','↗NE','→E','↘SE','↓S','↙SO','←O','↖NO'];
+        return dirs[Math.round(deg / 45) % 8];
+    }
+
+    async function fetchWeather() {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weathercode,relative_humidity_2m,wind_speed_10m,wind_direction_10m,precipitation_probability&hourly=temperature_2m,weathercode,precipitation_probability&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FParis&forecast_days=7`;
+        try {
+            const res = await fetch(url);
+            weatherData = await res.json();
+            render();
+        } catch(e) {
+            document.getElementById('page-content').innerHTML = '<div class="error-msg" style="grid-column:1/-1">Impossible de charger la météo. Vérifiez votre connexion internet.</div>';
+        }
+    }
+
+    function getHourlyForDay(dayIndex) {
+        const date = weatherData.daily.time[dayIndex];
+        const hours = [8, 12, 14, 17, 20];
+        return hours.map(h => {
+            const key = `${date}T${String(h).padStart(2,'0')}:00`;
+            const idx = weatherData.hourly.time.indexOf(key);
+            if (idx === -1) return null;
+            return {
+                time: `${String(h).padStart(2,'0')}:00`,
+                temp: weatherData.hourly.temperature_2m[idx],
+                code: weatherData.hourly.weathercode[idx]
+            };
+        }).filter(Boolean);
+    }
+
+    function render() {
+        const d = weatherData;
+        const cur = d.current;
+        const now = new Date();
+        const dayName = DAYS_FR[now.getDay()].toUpperCase();
+        const dateStr = `${dayName} ${now.getDate()} ${MONTHS_FR[now.getMonth()].toUpperCase()}`;
+
+        const hourly = getHourlyForDay(selectedDay);
+        const isToday = selectedDay === 0;
+
+        // 7-day forecast cards
+        let forecastHTML = '';
+        d.daily.time.forEach((date, i) => {
+            const dt = new Date(date + 'T12:00:00');
+            const name = DAYS_FR[dt.getDay()].toUpperCase();
+            const icon = WMO_ICONS[d.daily.weathercode[i]] || '🌤️';
+            forecastHTML += `
+                <div class="forecast-card ${i === selectedDay ? 'active' : ''}" onclick="selectDay(${i})">
+                    <div class="forecast-temps">
+                        <div class="forecast-day">${name}</div>
+                        <div class="forecast-max">${toDisplay(d.daily.temperature_2m_max[i])}</div>
+                        <div class="forecast-min">${toDisplay(d.daily.temperature_2m_min[i])}</div>
+                    </div>
+                    <div class="forecast-icon">${icon}</div>
+                </div>`;
+        });
+
+        // Hourly rows
+        let hourlyHTML = '';
+        hourly.forEach(h => {
+            hourlyHTML += `
+                <div class="hourly-row">
+                    <span class="hourly-time">${h.time}</span>
+                    <span class="hourly-temp">${toDisplay(h.temp)}</span>
+                    <span class="hourly-icon">${WMO_ICONS[h.code] || '🌤️'}</span>
+                </div>`;
+        });
+
+        // Main display — today uses current data, other days use daily
+        const displayTemp = isToday ? cur.temperature_2m : ((d.daily.temperature_2m_max[selectedDay] + d.daily.temperature_2m_min[selectedDay]) / 2);
+        const displayCode = isToday ? cur.weathercode : d.daily.weathercode[selectedDay];
+        const displayHumidity = isToday ? cur.relative_humidity_2m : '—';
+        const displayWind = isToday ? `${windDir(cur.wind_direction_10m)} ${Math.round(cur.wind_speed_10m)} km/h` : '—';
+        const displayRain = isToday ? (cur.precipitation_probability ?? '—') + '%' : (d.daily.precipitation_probability_max[selectedDay] ?? '—') + '%';
+
+        const selectedDate = new Date(d.daily.time[selectedDay] + 'T12:00:00');
+        const selectedLabel = isToday ? dateStr : `${DAYS_FR[selectedDate.getDay()].toUpperCase()} ${selectedDate.getDate()} ${MONTHS_FR[selectedDate.getMonth()].toUpperCase()}`;
+
+        document.getElementById('page-content').innerHTML = `
+            <div class="main-panel">
+                <div class="location">${LOCATION}</div>
+                <div class="date-label">${selectedLabel}</div>
+                <div class="current-temp-row">
+                    <div class="current-temp">${toDisplay(displayTemp)}</div>
+                    <div class="current-icon">${WMO_ICONS[displayCode] || '🌤️'}</div>
+                </div>
+                <div class="current-desc">${WMO_DESC[displayCode] || ''}</div>
+                <div class="hourly-list">${hourlyHTML}</div>
+                <div class="stats-grid">
+                    <div class="stat-row"><span class="stat-label">Probabilité de pluie</span><span class="stat-value">${displayRain}</span></div>
+                    <div class="stat-row"><span class="stat-label">Humidité</span><span class="stat-value">${displayHumidity}${isToday ? '%' : ''}</span></div>
+                    <div class="stat-row"><span class="stat-label">Force du vent</span><span class="stat-value">${displayWind}</span></div>
+                </div>
+            </div>
+            <div class="forecast-panel">${forecastHTML}</div>
+        `;
+    }
+
+    function selectDay(i) {
+        selectedDay = i;
+        render();
+    }
+
+    fetchWeather();
+</script>
+</body>
+</html>
