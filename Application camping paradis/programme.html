@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programme de la semaine - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-blue: #34BDEF; --text-dark: #333; --text-light: #666; --bg-light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); background: var(--bg-light); }
+
+        header { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 900px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 15px; }
+        .back-button { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 22px; cursor: pointer; padding: 8px 14px; border-radius: 6px; text-decoration: none; transition: background 0.3s; }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 24px 20px 60px; }
+
+        .pdf-wrapper { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); overflow: hidden; }
+
+        .pdf-frame { width: 100%; height: 80vh; border: none; display: block; }
+
+        .pdf-fallback { display: none; text-align: center; padding: 40px 20px; }
+        .pdf-fallback p { color: var(--text-light); font-size: 14px; margin-bottom: 16px; }
+        .download-btn { display: inline-block; background: var(--primary-blue); color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; }
+        .download-btn:hover { opacity: 0.85; }
+
+        .tip { background: #f0f8ff; border-left: 4px solid var(--primary-blue); border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; color: var(--text-light); }
+        .tip strong { color: var(--text-dark); }
+
+        footer { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 35px 20px; text-align: center; }
+        footer p { margin-bottom: 8px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a class="back-button" href="index.html">←</a>
+        <h1>Programme de la semaine</h1>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="tip">
+        <strong>Astuce :</strong> Pincez l'écran pour zoomer sur le programme. Vous pouvez aussi le télécharger pour le consulter hors connexion.
+    </div>
+
+    <div class="pdf-wrapper">
+        <iframe
+            class="pdf-frame"
+            src="documents/programme.pdf"
+            type="application/pdf"
+            title="Programme de la semaine">
+        </iframe>
+        <div class="pdf-fallback" id="fallback">
+            <p>Votre navigateur ne peut pas afficher le PDF directement.</p>
+            <a class="download-btn" href="documents/programme.pdf" download>Télécharger le programme</a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+    <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+    <p style="margin-top:15px; opacity:0.8; font-size:12px;">&copy; 2026 Tous droits réservés.</p>
+</footer>
+
+<script>
+    // Si l'iframe ne charge pas le PDF, afficher le bouton de téléchargement
+    const frame = document.querySelector('.pdf-frame');
+    frame.addEventListener('error', function() {
+        frame.style.display = 'none';
+        document.getElementById('fallback').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>
