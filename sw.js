@@ -1,156 +1,67 @@
-// Service Worker pour Camping Paradis PWA
-// Permet: notifications push, cache hors ligne, etc.
-
+// ── Service Worker — Camping Paradis ────────────────────────────────
 const CACHE_NAME = 'camping-paradis-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/kayak.html',
-  '/laverie.html',
-  '/locations.html',
-  '/wifi.html',
-  '/restaurant.html',
-  '/epicerie.html',
-  '/petit-dejeuner.html',
-  '/horaires.html',
-  '/manifest.json'
+const ASSETS = [
+  '/Camping-paradis/',
+  '/Camping-paradis/index.html',
+  '/Camping-paradis/manifest.json',
+  '/Camping-paradis/images/camping-hero.jpg',
+  '/Camping-paradis/meteo.html',
+  '/Camping-paradis/horaires.html',
+  '/Camping-paradis/plan.html',
+  '/Camping-paradis/checkin.html',
+  '/Camping-paradis/pot-accueil.html',
+  '/Camping-paradis/kayak.html',
+  '/Camping-paradis/laverie.html',
+  '/Camping-paradis/locations.html',
+  '/Camping-paradis/restaurant.html',
+  '/Camping-paradis/epicerie.html',
+  '/Camping-paradis/gorges-ain.html',
+  '/Camping-paradis/visite-nantua.html',
+  '/Camping-paradis/sous-la-pluie.html'
 ];
 
-// Installation du Service Worker
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
-      .catch(err => console.log('Erreur cache:', err))
+// Installation : mise en cache des ressources
+self.addEventListener('install', function(e) {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      console.log('Cache ouvert');
+      return cache.addAll(ASSETS);
+    })
   );
   self.skipWaiting();
 });
 
-// Activation du Service Worker
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
+// Activation : nettoyage des anciens caches
+self.addEventListener('activate', function(e) {
+  e.waitUntil(
+    caches.keys().then(function(keys) {
       return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
+        keys.filter(function(key) { return key !== CACHE_NAME; })
+            .map(function(key) { return caches.delete(key); })
       );
     })
   );
   self.clients.claim();
 });
 
-// Fetch - Stratégie Network First, puis Cache
-self.addEventListener('fetch', event => {
-  // Pour les images, utiliser le cache en priorité
-  if (event.request.destination === 'image') {
-    event.respondWith(
-      caches.match(event.request)
-        .then(response => response || fetch(event.request))
-        .catch(() => new Response('Image non disponible'))
-    );
-    return;
-  }
+// Fetch : réseau en priorité, cache en fallback
+self.addEventListener('fetch', function(e) {
+  // Ne pas intercepter les requêtes API météo
+  if (e.request.url.includes('open-meteo.com')) return;
 
-  // Pour le reste, essayer le réseau d'abord
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        // Cloner la réponse
-        const responseClone = response.clone();
-        
-        // Mettre en cache si ce n'est pas un POST
-        if (event.request.method === 'GET') {
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseClone);
-          });
-        }
-        
-        return response;
+  e.respondWith(
+    fetch(e.request)
+      .then(function(resp) {
+        // Mettre à jour le cache avec la réponse réseau
+        var respClone = resp.clone();
+        caches.open(CACHE_NAME).then(function(cache) {
+          cache.put(e.request, respClone);
+        });
+        return resp;
       })
-      .catch(() => {
-        // Si le réseau échoue, utiliser le cache
-        return caches.match(event.request)
-          .then(response => response || new Response('Hors ligne - Page non en cache'));
+      .catch(function() {
+        // Réseau indisponible → utiliser le cache
+        return caches.match(e.request);
       })
   );
-});
-
-// Recevoir les messages Push
-self.addEventListener('push', event => {
-  if (!event.data) {
-    console.log('Push reçu sans données');
-    return;
-  }
-
-  try {
-    const data = event.data.json();
-    const options = {
-      body: data.body || 'Nouvelle notification de Camping Paradis',
-      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect fill="%2334BDEF" width="192" height="192"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="80" fill="white" font-family="Arial">🏕️</text></svg>',
-      badge: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><circle fill="%2334BDEF" cx="48" cy="48" r="48"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50" fill="white">🏕️</text></svg>',
-      tag: data.tag || 'camping-paradis',
-      requireInteraction: data.requireInteraction || false,
-      actions: [
-        {
-          action: 'open',
-          title: 'Ouvrir'
-        },
-        {
-          action: 'close',
-          title: 'Fermer'
-        }
-      ],
-      data: {
-        url: data.url || '/'
-      }
-    };
-
-    if (data.image) {
-      options.image = data.image;
-    }
-
-    event.waitUntil(
-      self.registration.showNotification('Camping Paradis', options)
-    );
-  } catch (e) {
-    console.error('Erreur parsing push:', e);
-    event.waitUntil(
-      self.registration.showNotification('Camping Paradis', {
-        body: event.data.text()
-      })
-    );
-  }
-});
-
-// Cliquer sur la notification
-self.addEventListener('notificationclick', event => {
-  event.notification.close();
-
-  const urlToOpen = event.notification.data.url || '/';
-
-  event.waitUntil(
-    clients.matchAll({ type: 'window' }).then(windowClients => {
-      // Vérifier si l'app est déjà ouverte
-      for (let i = 0; i < windowClients.length; i++) {
-        const client = windowClients[i];
-        if (client.url === urlToOpen && 'focus' in client) {
-          return client.focus();
-        }
-      }
-      // Sinon, ouvrir une nouvelle fenêtre
-      if (clients.openWindow) {
-        return clients.openWindow(urlToOpen);
-      }
-    })
-  );
-});
-
-// Fermer la notification
-self.addEventListener('notificationclose', event => {
-  console.log('Notification fermée');
 });
