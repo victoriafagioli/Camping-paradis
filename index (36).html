@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camping Paradis - Les Gorges du Haut Bugey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#34BDEF">
+
+    <!-- ── Google Analytics G-9X0YBNRWMD ── -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X0YBNRWMD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9X0YBNRWMD');
+    </script>
+    <meta name="description" content="Application officielle du Camping Paradis. Accès aux services, horaires, kayak, laverie et bien plus !">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Camping Paradis">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%2334BDEF' width='180' height='180'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='80' fill='white' font-family='Arial'>🏕️</text></svg>">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-green: #2d5016;
+            --secondary-green: #1a7a3a;
+            --accent-orange: #FF8C00;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #ffffff;
+            --white: #ffffff;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); line-height: 1.6; background: #ffffff; }
+
+        .hero {
+            background: white;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        /* hero decorative removed */
+        .hero-photo {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .hero-identity {
+            background: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .hero-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .hero-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            line-height: 1.3;
+        }
+        
+        
+        
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 60px 0; border-bottom: 1px solid #f0f0f0; }
+        section:last-child { border-bottom: none; }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 40px; color: var(--primary-blue); text-align: center; }
+
+        .welcome-box { background: white; padding: 40px; border-radius: 12px; border-left: 5px solid var(--primary-blue); box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 40px; text-align: center; }
+        .welcome-box h3 { color: var(--primary-green); margin-bottom: 15px; font-size: 24px; }
+        .welcome-box p { color: var(--text-light); font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
+        .welcome-box p strong { color: var(--primary-blue); font-weight: 600; }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+        .card-image { width: 100%; height: 180px; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; font-size: 60px; color: white; position: relative; overflow: hidden; }
+        .card-content { padding: 25px; }
+        .card-title { font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 10px; }
+        .card-description { font-size: 14px; color: var(--text-light); line-height: 1.6; }
+
+        .bubble-section { margin-top: 60px; }
+        .bubble-subtitle { font-size: 20px; font-weight: 700; color: var(--primary-blue); margin-bottom: 25px; margin-top: 40px; }
+
+        .carousel-wrapper { margin-bottom: 0; }
+        .bubble-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+
+        .bubble { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; display: block; min-width: 0; }
+        .bubble:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+        .bubble-image { width: 100%; height: 180px; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: white; overflow: hidden; position: relative; }
+        .bubble-image::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.2); }
+        .bubble-image-content { position: relative; z-index: 1; font-size: 50px; }
+        .bubble-title { font-size: 16px; font-weight: 600; color: var(--text-dark); padding: 15px 18px; }
+
+        #install-app-btn { display: none; position: fixed; bottom: 20px; right: 20px; background: var(--accent-orange); color: white; padding: 12px 25px; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 999; }
+        #install-app-btn:hover { background: #ff7c00; transform: translateY(-2px); }
+
+        footer { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 40px 20px; text-align: center; }
+        footer p { margin-bottom: 10px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+
+        @media (max-width: 768px) {
+        .bubble-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        
+            
+            .section-title { font-size: 24px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .bubble-image { height: 150px; }
+            .bubble-image-content { font-size: 40px; }
+        }
+
+        .card { animation: slideInUp 0.6s ease-out forwards; }
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    
+    /* ── BOUTON FLOTTANT RÉCEPTION ─────────────────────────────────── */
+    .btn-float {
+        position: fixed;
+        bottom: 24px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        text-decoration: none;
+        filter: drop-shadow(0 4px 16px rgba(52,189,239,0.5));
+        animation: float-pulse 2.5s ease-in-out infinite;
+    }
+    .btn-float-circle {
+        width: 62px;
+        height: 62px;
+        background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        transition: transform 0.2s;
+    }
+    .btn-float:active .btn-float-circle {
+        transform: scale(0.93);
+    }
+    .btn-float-label {
+        background: #2a9ec4;
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 10px 4px;
+        border-radius: 0 0 10px 10px;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        margin-top: -2px;
+    }
+    @keyframes float-pulse {
+        0%, 100% { transform: translateY(0px); }
+        50%       { transform: translateY(-6px); }
+    }
+    /* Évite que le bouton cache le contenu en bas */
+    .footer { padding-bottom: 90px !important; }
+
+    /* ── MODE NUIT AUTOMATIQUE ──────────────────────────────────────── */
+    body.mode-nuit {
+        background-color: #121212 !important;
+        color: #e0e0e0 !important;
+    }
+    body.mode-nuit header,
+    body.mode-nuit .hero-identity {
+        background: linear-gradient(135deg, #1a3a4a 0%, #0d2233 100%) !important;
+    }
+    body.mode-nuit .section-title {
+        color: #90cce8 !important;
+    }
+    body.mode-nuit .bubble {
+        background: #1e1e1e !important;
+        border: 1px solid #333 !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.4) !important;
+    }
+    body.mode-nuit .bubble-title {
+        color: #e0e0e0 !important;
+        background: rgba(30,30,30,0.92) !important;
+    }
+    body.mode-nuit .welcome-box,
+    body.mode-nuit .info-block,
+    body.mode-nuit .service-card {
+        background: #1e1e1e !important;
+        color: #e0e0e0 !important;
+        border-color: #333 !important;
+    }
+    body.mode-nuit footer {
+        background: linear-gradient(135deg, #0a1a24 0%, #0d2233 100%) !important;
+    }
+    body.mode-nuit .container {
+        background: #121212 !important;
+    }
+    /* Indicateur mode nuit */
+    #night-indicator {
+        display: none;
+        position: fixed;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(30,30,30,0.92);
+        color: #90cce8;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 5px 14px;
+        border-radius: 20px;
+        z-index: 9998;
+        letter-spacing: 0.3px;
+        backdrop-filter: blur(8px);
+    }
+    body.mode-nuit #night-indicator { display: block; }
+
+    
+    /* ── POP-UP INSTALLATION ────────────────────────────────────────── */
+    #install-popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(4px);
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0 0 20px;
+    }
+    #install-popup.show { display: flex; }
+    .install-card {
+        background: white;
+        border-radius: 24px 24px 16px 16px;
+        padding: 28px 24px 24px;
+        max-width: 420px;
+        width: 92%;
+        text-align: center;
+        box-shadow: 0 -4px 40px rgba(0,0,0,0.2);
+        animation: slideUp 0.4s ease;
+    }
+    @keyframes slideUp {
+        from { transform: translateY(100px); opacity: 0; }
+        to   { transform: translateY(0);    opacity: 1; }
+    }
+    .install-icon { font-size: 52px; margin-bottom: 12px; }
+    .install-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #1a2a3a;
+        margin-bottom: 8px;
+    }
+    .install-subtitle {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.5;
+    }
+    .install-steps {
+        background: #f0f8ff;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 18px;
+        text-align: left;
+    }
+    .install-step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 8px;
+    }
+    .install-step:last-child { margin-bottom: 0; }
+    .install-step-num {
+        background: #34BDEF;
+        color: white;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+    .install-btn-primary {
+        display: block;
+        background: linear-gradient(135deg, #34BDEF, #2a9ec4);
+        color: white;
+        border: none;
+        border-radius: 14px;
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        width: 100%;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+    .install-btn-skip {
+        background: none;
+        border: none;
+        color: #999;
+        font-size: 13px;
+        cursor: pointer;
+        padding: 6px;
+    }
+
+    
+    /* ── SECTION SIGNALEMENT ─────────────────────────────────────────── */
+    .signalement-section {
+        background: linear-gradient(135deg, #f8faff 0%, #eef4ff 100%);
+        border-top: 1px solid #e0e8f5;
+        padding: 48px 20px 56px;
+    }
+    .signalement-inner {
+        max-width: 580px;
+        margin: 0 auto;
+    }
+    .signalement-header {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+    .signalement-icon {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(135deg, #34BDEF, #2a9ec4);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        margin: 0 auto 16px;
+        box-shadow: 0 8px 24px rgba(52,189,239,0.3);
+    }
+    .signalement-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1a2a3a;
+        margin-bottom: 6px;
+    }
+    .signalement-subtitle {
+        font-size: 14px;
+        color: #6b7a8d;
+        line-height: 1.5;
+    }
+    .signalement-form {
+        background: white;
+        border-radius: 20px;
+        padding: 28px 24px;
+        box-shadow: 0 8px 32px rgba(52,189,239,0.1);
+        border: 1px solid rgba(52,189,239,0.15);
+    }
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 14px;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #34BDEF;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+        border: 1.5px solid #e0e8f5;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 15px;
+        font-family: inherit;
+        color: #1a2a3a;
+        background: #f8faff;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+        border-color: #34BDEF;
+        box-shadow: 0 0 0 3px rgba(52,189,239,0.15);
+        background: white;
+    }
+    .form-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2334BDEF' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        padding-right: 36px;
+        cursor: pointer;
+    }
+    .form-textarea {
+        resize: none;
+        height: 100px;
+        line-height: 1.5;
+    }
+    .form-submit {
+        width: 100%;
+        background: linear-gradient(135deg, #34BDEF, #2a9ec4);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 15px;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        margin-top: 6px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 16px rgba(52,189,239,0.35);
+        letter-spacing: 0.2px;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(52,189,239,0.45); }
+    .form-submit:active { transform: translateY(0); }
+    .form-success {
+        display: none;
+        text-align: center;
+        padding: 32px 20px;
+    }
+    .form-success-icon { font-size: 52px; margin-bottom: 14px; }
+    .form-success-title { font-size: 20px; font-weight: 700; color: #1a2a3a; margin-bottom: 8px; }
+    .form-success-text { font-size: 14px; color: #6b7a8d; line-height: 1.6; }
+    @media (max-width: 480px) {
+        .form-row { grid-template-columns: 1fr; }
+    }
+
+    
+    @keyframes bonplan-in {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- ── INDICATEUR MODE NUIT ── -->
+    <div id="night-indicator">🌙 Mode nuit activé</div>
+
+    <!-- ── POP-UP INSTALLATION ── -->
+    <div id="install-popup">
+      <div class="install-card">
+        <div class="install-icon">🏕️</div>
+        <div class="install-title">Installer l'application</div>
+        <div class="install-subtitle">Accédez à toutes les infos du camping en un clic, même sans connexion !</div>
+        <div class="install-steps" id="install-steps-ios">
+          <div class="install-step"><div class="install-step-num">1</div><span>Appuie sur le bouton <strong>Partager</strong> ⬆️ en bas de Safari</span></div>
+          <div class="install-step"><div class="install-step-num">2</div><span>Sélectionne <strong>"Sur l'écran d'accueil"</strong></span></div>
+          <div class="install-step"><div class="install-step-num">3</div><span>Appuie sur <strong>"Ajouter"</strong> en haut à droite</span></div>
+        </div>
+        <div class="install-steps" id="install-steps-android" style="display:none;">
+          <div class="install-step"><div class="install-step-num">1</div><span>Appuie sur le menu <strong>⋮</strong> en haut à droite</span></div>
+          <div class="install-step"><div class="install-step-num">2</div><span>Sélectionne <strong>"Ajouter à l'écran d'accueil"</strong></span></div>
+          <div class="install-step"><div class="install-step-num">3</div><span>Confirme en appuyant sur <strong>"Ajouter"</strong></span></div>
+        </div>
+        <button class="install-btn-primary" onclick="closeInstallPopup()">✓ J'ai compris !</button>
+        <button class="install-btn-skip" onclick="closeInstallPopup()">Continuer sans installer</button>
+      </div>
+    </div>
+
+
+    <button id="install-app-btn">📱 Installer l'App</button>
+
+    <section class="hero">
+        <img class="hero-photo" src="images/camping-hero.jpg" alt="Camping Paradis">
+        <div class="hero-identity">
+            <div class="hero-logo">🏕️</div>
+            <div class="hero-name">Camping Paradis Les Gorges du Haut Bugey</div>
+        </div>
+    </section>
+
+    <!-- ══ MÉTÉO EN DIRECT ══════════════════════════════════════════ -->
+    <section class="container" style="padding-top:0; padding-bottom:0;">
+        <div id="meteo-widget" style="
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            box-shadow: 0 4px 16px rgba(52,189,239,0.3);
+            gap: 12px;
+        ">
+            <div style="display:flex; align-items:center; gap:12px; flex:1;">
+                <div id="meteo-icon" style="font-size:40px; line-height:1;">⛅</div>
+                <div>
+                    <div style="font-size:11px; font-weight:700; opacity:0.85; text-transform:uppercase; letter-spacing:0.5px;">Matafelon-Granges · Aujourd'hui</div>
+                    <div style="display:flex; align-items:baseline; gap:6px; margin-top:2px;">
+                        <span id="meteo-temp" style="font-size:32px; font-weight:800; line-height:1;">--°</span>
+                        <span id="meteo-desc" style="font-size:13px; opacity:0.9;">Chargement...</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:right; flex-shrink:0;">
+                <div style="font-size:11px; opacity:0.8; margin-bottom:4px;">Min / Max</div>
+                <div id="meteo-minmax" style="font-size:14px; font-weight:700;">-- / --</div>
+                <div id="meteo-vent" style="font-size:11px; opacity:0.8; margin-top:2px;">💨 --</div>
+            </div>
+            <a href="meteo.html" style="
+                background: rgba(255,255,255,0.2);
+                color: white;
+                text-decoration: none;
+                padding: 8px 14px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 700;
+                flex-shrink: 0;
+                border: 1px solid rgba(255,255,255,0.3);
+            ">Voir plus →</a>
+        </div>
+
+        <!-- BON PLAN — même largeur que la météo -->
+        <div id="bonplan-container" style="display:none; margin-bottom:12px;">
+            <div id="bonplan-banner" style="
+                border-radius: 14px;
+                padding: 14px 18px;
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+                animation: bonplan-in 0.5s ease;
+                background: linear-gradient(135deg, #FF8C00, #FFB347);
+            ">
+                <div id="bonplan-emoji" style="font-size:32px; flex-shrink:0;">🎉</div>
+                <div style="flex:1;">
+                    <div style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.8); text-transform:uppercase; letter-spacing:1px; margin-bottom:2px;">Bon plan du jour</div>
+                    <div id="bonplan-texte" style="font-size:15px; font-weight:700; color:white; line-height:1.3;">Chargement...</div>
+                </div>
+                <div id="bonplan-badge" style="
+                    background: rgba(255,255,255,0.25);
+                    color: white;
+                    font-size: 11px;
+                    font-weight: 700;
+                    padding: 4px 10px;
+                    border-radius: 20px;
+                    flex-shrink: 0;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    white-space: nowrap;
+                ">Aujourd'hui</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container bubble-section">
+        <div class="section-title">Vie au camping</div>
+        <div class="carousel-wrapper"><div class="bubble-grid" id="carousel0">
+                <a href="horaires.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/horaires.jpg');"></div>
+                    <div class="bubble-title">Horaires du Camping</div>
+                </a>
+                <a href="plan.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/plan.jpg');"></div>
+                    <div class="bubble-title">Plan du camping</div>
+                </a>
+                <a href="checkin.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/checkin.jpg');"></div>
+                    <div class="bubble-title">Check-in / Check-out</div>
+                </a>
+                <a href="pot-accueil.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/potaccueil.jpg');"></div>
+                    <div class="bubble-title">Pot d'accueil</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-title">Nos Services</div>
+        <div class="cards-grid">
+            <a href="kayak.html" class="card">
+                <div class="card-image" style="background-image: url('images/kayak.jpg');"></div>
+                <div class="card-content"><div class="card-title">Kayak</div><div class="card-description">Explorez le lac du Val d'Oignin en kayak</div></div>
+            </a>
+            <a href="laverie.html" class="card">
+                <div class="card-image" style="background-image: url('images/laverie.jpg');"></div>
+                <div class="card-content"><div class="card-title">Laverie</div><div class="card-description">Service de laverie disponible 24h/24</div></div>
+            </a>
+            <a href="locations.html" class="card">
+                <div class="card-image" style="background-image: url('images/barbecue.jpg');"></div>
+                <div class="card-content"><div class="card-title">Locations Diverses</div><div class="card-description">Barbecue, draps, kit bébé, linge de toilettes</div></div>
+            </a>
+            <a href="wifi.html" class="card">
+                <div class="card-image" style="background-image: url('images/wifi.jpg');"></div>
+                <div class="card-content"><div class="card-title">WiFi</div><div class="card-description">Connexion internet gratuite</div></div>
+            </a>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-title">Restauration & Bar</div>
+        <div class="cards-grid">
+            <a href="restaurant.html" class="card">
+                <div class="card-image" style="background-image: url('images/restaurant_bar.jpg');"></div>
+                <div class="card-content"><div class="card-title">Restaurant et Bar</div><div class="card-description">Spécialités régionales et cocktails</div></div>
+            </a>
+            <a href="epicerie.html" class="card">
+                <div class="card-image" style="background-image: url('images/epicerie.jpg');"></div>
+                <div class="card-content"><div class="card-title">Épicerie</div><div class="card-description">Produits essentiels</div></div>
+            </a>
+            <a href="petit-dejeuner.html" class="card">
+                <div class="card-image" style="background-image: url('images/petit-d%C3%A9jeuner.jpg');"></div>
+                <div class="card-content"><div class="card-title">Petit-Déjeuner</div><div class="card-description">Pain frais et viennoiseries chaque matin</div></div>
+            </a>
+        </div>
+    </section>
+
+    <section class="container bubble-section">
+        <div class="section-title">Autour du camping</div>
+
+        <div class="carousel-wrapper"><div class="bubble-grid" id="carousel1">
+                <a href="activites.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/activites.jpg');"></div>
+                    <div class="bubble-title">Activités à faire</div>
+                </a>
+                <a href="restaurant.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/restaurant.jpg');"></div>
+                    <div class="bubble-title">Restaurants</div>
+                </a>
+                <a href="gorges-ain.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/a%20visiter.jpg');"></div>
+                    <div class="bubble-title">À visiter</div>
+                </a>
+                <a href="#" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/randonnee.jpg');"></div>
+                    <div class="bubble-title">Randonnées et Balades</div>
+                </a>
+                <a href="#" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/marche.jpg');"></div>
+                    <div class="bubble-title">Marchés</div>
+                </a>
+                <a href="#" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/commerces.jpg');"></div>
+                    <div class="bubble-title">Commerces</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container bubble-section">
+        <div class="section-title">Animations</div>
+        <div class="carousel-wrapper"><div class="bubble-grid" id="carousel3">
+                <a href="programme.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/proganimations.jpg');"></div>
+                    <div class="bubble-title">Programme de la semaine</div>
+                </a>
+                <a href="club-enfants.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/clubenfants.jpg');"></div>
+                    <div class="bubble-title">Club enfants</div>
+                </a>
+                <a href="paradis-des-stars.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/paradis.jpg');"></div>
+                    <div class="bubble-title">Paradis des stars</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container bubble-section">
+        <div class="section-title">Circulation</div>
+        <div class="carousel-wrapper"><div class="bubble-grid" id="carousel4">
+                <a href="barriere.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/barriere.jpg');"></div>
+                    <div class="bubble-title">Horaires de la barrière</div>
+                </a>
+                <a href="vehicule-electrique.html" class="bubble">
+                    <div class="bubble-image" style="background-image: url('images/electrique.jpg');"></div>
+                    <div class="bubble-title">Véhicule électrique</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ── SECTION SIGNALEMENT ─────────────────────────────────────── -->
+    <section class="signalement-section">
+        <div class="signalement-inner">
+            <div class="signalement-header">
+                <div class="signalement-icon">🔧</div>
+                <div class="signalement-title">Signaler un problème</div>
+                <div class="signalement-subtitle">Notre équipe intervient dans les plus brefs délais.<br>Décrivez votre situation et nous revenons vers vous rapidement.</div>
+            </div>
+
+            <div class="signalement-form" id="signalement-form-wrap">
+                <form
+                    action="https://formsubmit.co/direction@camping-lesgorgesduhautbugey.fr"
+                    method="POST"
+                    onsubmit="handleSignalement(event)"
+                >
+                    <!-- FormSubmit config -->
+                    <input type="hidden" name="_subject" value="🔧 Nouveau signalement — Camping Paradis">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">N° d'emplacement *</label>
+                            <input
+                                type="text"
+                                name="Emplacement"
+                                class="form-input"
+                                placeholder="Ex : 42"
+                                required
+                                pattern="[0-9]+"
+                                title="Numéro uniquement"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Type de problème *</label>
+                            <select name="Type de problème" class="form-select" required>
+                                <option value="" disabled selected>Choisir...</option>
+                                <option>🚿 Sanitaires</option>
+                                <option>🔌 Électricité / Eau</option>
+                                <option>🔊 Nuisances sonores</option>
+                                <option>🗑️ Propreté</option>
+                                <option>🌿 Végétation / Terrain</option>
+                                <option>🚗 Circulation / Barrière</option>
+                                <option>🍽️ Restaurant / Épicerie</option>
+                                <option>🏊 Piscine</option>
+                                <option>📶 WiFi</option>
+                                <option>❓ Autre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label class="form-label">Description *</label>
+                            <textarea
+                                name="Description"
+                                class="form-textarea"
+                                placeholder="Décrivez votre problème en quelques mots..."
+                                required
+                                minlength="10"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label class="form-label">Téléphone (optionnel)</label>
+                            <input
+                                type="tel"
+                                name="Téléphone"
+                                class="form-input"
+                                placeholder="Pour qu'on vous rappelle si besoin"
+                            >
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-submit">
+                        Envoyer le signalement →
+                    </button>
+                </form>
+            </div>
+
+            <!-- Message de succès -->
+            <div class="signalement-form" id="signalement-success" style="display:none;">
+                <div class="form-success" style="display:block;">
+                    <div class="form-success-icon">✅</div>
+                    <div class="form-success-title">Signalement envoyé !</div>
+                    <div class="form-success-text">Notre équipe a bien reçu votre message et interviendra dans les plus brefs délais.<br><br>Merci de nous aider à améliorer votre séjour 🙏</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+        <p>Ouverture: 30/04/2026 au 28/09/2026</p>
+        <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+        <p style="margin-top:20px; opacity:0.8; font-size:12px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
+
+    <script src="pwa-init.js"></script>
+    <script>
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+
+    <script>
+        const carouselState = {};
+
+        function getVisibleCount(gridId) {
+            const grid = document.getElementById(gridId);
+            const cols = window.getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+            return cols;
+        }
+
+        function moveCarousel(gridId, direction) {
+            const grid = document.getElementById(gridId);
+            const items = Array.from(grid.children);
+            const visible = getVisibleCount(gridId);
+            if (!carouselState[gridId]) carouselState[gridId] = 0;
+            const newIndex = carouselState[gridId] + direction * visible;
+            carouselState[gridId] = Math.max(0, Math.min(newIndex, items.length - visible));
+            items.forEach((item, i) => {
+                item.style.display = (i >= carouselState[gridId] && i < carouselState[gridId] + visible) ? '' : 'none';
+            });
+            document.getElementById(gridId + '-prev').disabled = carouselState[gridId] === 0;
+            document.getElementById(gridId + '-next').disabled = carouselState[gridId] + visible >= items.length;
+        }
+
+        function initCarousels() {
+            ['carousel0', 'carousel1', 'carousel2', 'carousel3', 'carousel4'].forEach(gridId => {
+                carouselState[gridId] = 0;
+                const grid = document.getElementById(gridId);
+                if (!grid) return;
+                const items = Array.from(grid.children);
+                const visible = getVisibleCount(gridId);
+                items.forEach((item, i) => { item.style.display = i < visible ? '' : 'none'; });
+                document.getElementById(gridId + '-next').disabled = items.length <= visible;
+            });
+        }
+
+        window.addEventListener('load', initCarousels);
+        window.addEventListener('resize', initCarousels);
+    </script>
+
+    <!-- ══ MÉTÉO API + SERVICE WORKER ═══════════════════════════════ -->
+    <!-- ── BOUTON FLOTTANT RÉCEPTION ─────────────────────────────────── -->
+    <a href="tel:+33474768097" class="btn-float" aria-label="Appeler la réception">
+        <div class="btn-float-circle">📞</div>
+        <div class="btn-float-label">Réception</div>
+    </a>
+
+    <script>
+    // ── Météo Open-Meteo (gratuit, sans clé API) ─────────────────────
+    const WMO_CODES = {
+      0:'Ciel dégagé',1:'Principalement dégagé',2:'Partiellement nuageux',3:'Couvert',
+      45:'Brouillard',48:'Brouillard givrant',
+      51:'Bruine légère',53:'Bruine modérée',55:'Bruine dense',
+      61:'Pluie légère',63:'Pluie modérée',65:'Pluie forte',
+      71:'Neige légère',73:'Neige modérée',75:'Neige forte',
+      80:'Averses légères',81:'Averses modérées',82:'Averses fortes',
+      85:'Averses de neige',86:'Averses de neige fortes',
+      95:'Orage',96:'Orage avec grêle',99:'Orage violent'
+    };
+    const WMO_ICONS = {
+      0:'☀️',1:'🌤️',2:'⛅',3:'☁️',
+      45:'🌫️',48:'🌫️',
+      51:'🌦️',53:'🌦️',55:'🌧️',
+      61:'🌧️',63:'🌧️',65:'🌧️',
+      71:'❄️',73:'❄️',75:'❄️',
+      80:'🌦️',81:'🌧️',82:'⛈️',
+      85:'❄️',86:'❄️',
+      95:'⛈️',96:'⛈️',99:'⛈️'
+    };
+
+    async function loadMeteo() {
+      try {
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=46.2619&longitude=5.5544&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FParis&forecast_days=1';
+        const resp = await fetch(url);
+        const data = await resp.json();
+        const cur = data.current;
+        const day = data.daily;
+        const code = cur.weathercode;
+        document.getElementById('meteo-temp').textContent = Math.round(cur.temperature_2m) + '°';
+        document.getElementById('meteo-desc').textContent = WMO_CODES[code] || 'Variable';
+        document.getElementById('meteo-icon').textContent = WMO_ICONS[code] || '🌡️';
+        document.getElementById('meteo-minmax').textContent = Math.round(day.temperature_2m_min[0]) + '° / ' + Math.round(day.temperature_2m_max[0]) + '°';
+        document.getElementById('meteo-vent').textContent = '💨 ' + Math.round(cur.windspeed_10m) + ' km/h';
+      } catch(e) {
+        document.getElementById('meteo-desc').textContent = 'Météo indisponible';
+      }
+    }
+    loadMeteo();
+
+
+
+    // ── FORMULAIRE SIGNALEMENT ────────────────────────────────────────
+    function handleSignalement(e) {
+        e.preventDefault();
+        var form = e.target;
+        var data = new FormData(form);
+
+        // Ajouter heure et date
+        var now = new Date();
+        var dateStr = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+        data.append('Date et heure', dateStr);
+
+        fetch('https://formsubmit.co/direction@camping-lesgorgesduhautbugey.fr', {
+            method: 'POST',
+            body: data
+        }).then(function() {
+            document.getElementById('signalement-form-wrap').style.display = 'none';
+            document.getElementById('signalement-success').style.display = 'block';
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'signalement_envoye');
+            }
+        }).catch(function() {
+            // Fallback : soumission classique
+            form.submit();
+        });
+    }
+
+
+    // ── BON PLAN DU JOUR ─────────────────────────────────────────────
+    async function loadBonPlan() {
+        try {
+            const resp = await fetch('bonplan.json?t=' + Date.now());
+            const data = await resp.json();
+            if (!data.actif) return;
+            document.getElementById('bonplan-emoji').textContent = data.emoji || '🎉';
+            document.getElementById('bonplan-texte').textContent = data.texte || '';
+            if (data.badge) document.getElementById('bonplan-badge').textContent = data.badge;
+            const banner = document.getElementById('bonplan-banner');
+            const couleurs = {
+                'orange': 'linear-gradient(135deg, #FF8C00, #FFB347)',
+                'bleu':   'linear-gradient(135deg, #34BDEF, #2a9ec4)',
+                'vert':   'linear-gradient(135deg, #27AE60, #2ecc71)',
+                'rouge':  'linear-gradient(135deg, #E74C3C, #e55039)',
+                'violet': 'linear-gradient(135deg, #8E44AD, #9b59b6)'
+            };
+            banner.style.background = couleurs[data.couleur] || couleurs['orange'];
+            document.getElementById('bonplan-container').style.display = 'block';
+            if (typeof gtag !== 'undefined') gtag('event', 'bonplan_vu', {texte: data.texte});
+        } catch(e) {}
+    }
+    loadBonPlan();
+
+    // ── MODE NUIT (21h → 7h) ─────────────────────────────────────────
+    function applyNightMode() {
+        var h = new Date().getHours();
+        if (h >= 21 || h < 7) {
+            document.body.classList.add('mode-nuit');
+        } else {
+            document.body.classList.remove('mode-nuit');
+        }
+    }
+    applyNightMode();
+    setInterval(applyNightMode, 60000); // vérifie toutes les minutes
+
+    // ── POP-UP INSTALLATION ──────────────────────────────────────────
+    function showInstallPopup() {
+        // Ne pas montrer si déjà vu ou si l'app est déjà installée
+        if (localStorage.getItem('install-seen')) return;
+        if (window.matchMedia('(display-mode: standalone)').matches) return;
+        if (window.navigator.standalone === true) return;
+
+        var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        var isAndroid = /android/i.test(navigator.userAgent);
+
+        if (!isIOS && !isAndroid) return; // desktop → pas de popup
+
+        if (isIOS) {
+            document.getElementById('install-steps-ios').style.display = 'block';
+            document.getElementById('install-steps-android').style.display = 'none';
+        } else {
+            document.getElementById('install-steps-ios').style.display = 'none';
+            document.getElementById('install-steps-android').style.display = 'block';
+        }
+
+        setTimeout(function() {
+            document.getElementById('install-popup').classList.add('show');
+            // Tracker l'affichage dans Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'install_popup_shown', { device: isIOS ? 'iOS' : 'Android' });
+            }
+        }, 2000); // apparaît après 2 secondes
+    }
+
+    function closeInstallPopup() {
+        document.getElementById('install-popup').classList.remove('show');
+        localStorage.setItem('install-seen', '1');
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'install_popup_closed');
+        }
+    }
+
+    // Tracker installation PWA
+    window.addEventListener('appinstalled', function() {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'pwa_installed');
+        }
+    });
+
+    window.addEventListener('load', showInstallPopup);
+
+    // ── Service Worker (app installable) ─────────────────────────────
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js')
+          .then(function(reg) { console.log('SW enregistré:', reg.scope); })
+          .catch(function(err) { console.log('SW erreur:', err); });
+      });
+    }
+    </script>
+</body>
+</html>
