@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escalade, accrobranche et via ferrata - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-green: #2d5016;
+            --accent-orange: #FF8C00;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        /* ===== TABS ===== */
+        .tabs-wrapper {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 66px;
+            z-index: 99;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tabs {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab {
+            background: none;
+            border: 1.5px solid #ddd;
+            color: var(--text-dark);
+            padding: 7px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .tab:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
+        .tab.active {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        /* ===== ACTIVITY CARD ===== */
+        .activity { display: none; }
+        .activity.active { display: block; }
+        .activity-name {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+        }
+        .activity-intro { margin-bottom: 24px; }
+        .activity-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        .activity-meta {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            background: #f0f8ff;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        /* ===== INFO BLOCK ===== */
+        .info-block {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .info-row {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            background: #f0f8ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .info-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .info-value a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        .info-value a:hover { text-decoration: underline; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+        footer p { margin-bottom: 8px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a class="back-button" href="index.html">←</a>
+            <h1>Escalade, accrobranche et via ferrata</h1>
+        </div>
+    </header>
+
+    <div class="tabs-wrapper">
+        <div class="tabs" id="tabs">
+            <button class="tab active" onclick="showActivity(0)">Via ferrata - Canyoning Emotions</button>
+            <button class="tab" onclick="showActivity(1)">Escalade avec Rev'asion</button>
+            <button class="tab" onclick="showActivity(2)">Via ferrata du Regardoir avec Rev'asion</button>
+            <button class="tab" onclick="showActivity(3)">Via ferrata avec les Guides du Bugey</button>
+            <button class="tab" onclick="showActivity(4)">Escalade à Terre Ronde avec Canyoning Emotions</button>
+            <button class="tab" onclick="showActivity(5)">Escalade avec les Guides du Bugey</button>
+            <button class="tab" onclick="showActivity(6)">Via ferrata du Regardoir avec Lézard des Bois</button>
+            <button class="tab" onclick="showActivity(7)">Via ferrata avec Rock'n Jump Adventure</button>
+            <button class="tab" onclick="showActivity(8)">Canyoning, Escalade, Via Ferrata avec Rock'n Jump Adventure</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- 0. VIA FERRATA - CANYONING EMOTIONS -->
+        <div class="activity active" id="act-0">
+            <div class="activity-name">Via ferrata - Canyoning Emotions</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Au départ d'Hostiaz, entre le Plateau d'Hauteville et Tenay dans l'Ain, nous commençons la via ferrata de la Guinguette par un itinéraire en forêt avant de superbes vues sur l'Albarine et les montagnes du Bugey. Un parcours accessible à tous !</div>
+                <span class="activity-meta">À partir de 12 ans · Durée : 3h00</span>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">50 € par personne</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">
+                            <a href="https://maps.google.com/?q=Hostiaz+01110+Plateau+d'Hauteville" target="_blank">Hostiaz, 01110 Plateau d'Hauteville, France</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💡</div>
+                    <div class="info-content">
+                        <div class="info-label">Conseils</div>
+                        <div class="info-value">
+                            Matériel à prévoir : une bonne paire de chaussures fermées de type baskets<br>
+                            De quoi grignoter
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">De juin à septembre</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://canyoningemotions.fr/" target="_blank">canyoningemotions.fr</a></div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value"><a href="tel:0624921428">06 24 92 14 28</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. ESCALADE AVEC REV'ASION -->
+        <div class="activity" id="act-1">
+            <div class="activity-name">Escalade avec Rev'asion</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Vous vous sentez prêt pour l'escalade, la vraie ? Vous voulez sentir la caresse âpre de la roche sous vos doigts ? N'attendez plus, l'Ain foisonne de sites d'escalade. Il n'y a plus qu'à choisir !</div>
+                <span class="activity-meta">Votre guide : Stéphane Bodillard</span>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Forfait / engagement : de 32 à 35 € (par personne)<br>
+                            Tarif groupe à partir de 4 personnes<br>
+                            Tarif adulte : 35 € / personne<br>
+                            Tarif réduit (enfants -16 ans, sans emploi) : 32 € / personne<br>
+                            Tarif famille : 32 € / personne<br>
+                            Tarif collectivités (centre de loisir, écoles, 8 mineurs + 1 accompagnateur) : 210 €<br>
+                            Pour les enterrements de vie de célibataire, l'activité est offerte pour le/la futur(e) marié(e) !
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">
+                            <a href="https://maps.google.com/?q=01110+Plateau+d'Hauteville" target="_blank">01110 Plateau d'Hauteville, France</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Du 01/04 au 01/11, tous les jours, de 14h à 17h l'après-midi.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.canyoning-escalade.com/" target="_blank">canyoning-escalade.com</a></div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value"><a href="tel:0612506577">06 12 50 65 77</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. VIA FERRATA DU REGARDOIR - REV'ASION -->
+        <div class="activity" id="act-2">
+            <div class="activity-name">Via ferrata du Regardoir avec Rev'asion</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Vous voulez prendre de la hauteur en toute sécurité ? Rien de plus simple, une paroi rocheuse avec des câbles, barreaux ou encore des passerelles seront à votre disposition pour franchir tous obstacles sans difficulté.</div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : 40 €<br>
+                            Enfant : 35 € (moins de 16 ans)<br>
+                            Forfait famille : 35 € (à partir de 4 personnes)<br>
+                            Groupe adultes : 35 € (minimum 6 personnes)<br>
+                            Tarif groupe à partir de 3 personnes<br>
+                            Colonie et centre de loisirs : 260 € / groupe — Individuel : 40 € / pers.
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Du 01/07 au 15/11, tous les jours. Deux départs par jour : un à 8h30 et l'autre à 12h30.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.hautbugey-tourisme.com/activite/via-ferrata-avec-revasion/" target="_blank">hautbugey-tourisme.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. VIA FERRATA - GUIDES DU BUGEY -->
+        <div class="activity" id="act-3">
+            <div class="activity-name">Via ferrata avec les Guides du Bugey</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Partez une demi-journée avec Éric pour un parcours de découverte de la via ferrata de la Guinguette à Hostiaz en famille ou entre amis, à 1h de Lyon dans le département de l'Ain, entre la vallée de l'Albarine et le Plateau d'Hauteville.</div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Tarif unique : de 45 à 60 € (prix par personne)<br>
+                            Tarif groupe à partir de 1 personne<br>
+                            Le tarif varie en fonction du parcours de via ferrata choisi
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Du 01/05 au 30/09, tous les jours. Sous réserve de conditions météo favorables. À la demande.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.hautbugey-tourisme.com/activite/via-ferrata-avec-equilibre-vertical/" target="_blank">hautbugey-tourisme.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ESCALADE TERRE RONDE - CANYONING EMOTIONS -->
+        <div class="activity" id="act-4">
+            <div class="activity-name">Escalade à Terre Ronde avec Canyoning Emotions</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Découvrez l'escalade sur un mur d'initiation adapté aux familles et aux groupes.</div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">Tarif groupe à partir de 4 personnes</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Du 15/06 au 30/09, tous les jours.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.hautbugey-tourisme.com/activite/escalade-a-terre-ronde-avec-canyoning-emotions/" target="_blank">hautbugey-tourisme.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. ESCALADE - GUIDES DU BUGEY -->
+        <div class="activity" id="act-5">
+            <div class="activity-name">Escalade avec les Guides du Bugey</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Suivez Éric, à la journée ou demi-journée, sur les voies d'escalade des 3 sites du Plateau d'Hauteville : à Terre Ronde sur le plateau d'Hauteville, au-dessus du lac de Nantua et à Hostiaz. Les sorties sont pour tous les niveaux : débutant à confirmé.</div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : de 50 à 100 € (prix par personne)<br>
+                            Tarif groupe à partir de 1 personne
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Du 01/05 au 30/09, tous les jours. Sorties organisées à la demande et sous réserve de conditions météo favorables.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.hautbugey-tourisme.com/activite/escalade-avec-equilibre-vertical/" target="_blank">hautbugey-tourisme.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. VIA FERRATA DU REGARDOIR - LÉZARD DES BOIS -->
+        <div class="activity" id="act-6">
+            <div class="activity-name">Via ferrata du Regardoir avec Lézard des Bois</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Voilà le meilleur moyen d'appréhender les sports de verticalité. Entre la randonnée et l'escalade, cheminez sur des parois, à l'aide de câbles, d'échelles et de barreaux, ancrés dans le rocher. Xavier vous guide en toute sécurité.</div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Plein tarif : 42 €<br>
+                            Tarif réduit : 38 €<br>
+                            Tarif groupe à partir de 6 personnes<br>
+                            Tarif réduit = groupe à partir de 6 personnes, enfants de moins de 16 ans, sans emploi
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Du 01/01 au 18/12, tous les jours. Sur réservation.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.hautbugey-tourisme.com/activite/via-ferrata-avec-lezard-des-bois/" target="_blank">hautbugey-tourisme.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. VIA FERRATA - ROCK'N JUMP ADVENTURE -->
+        <div class="activity" id="act-7">
+            <div class="activity-name">Via ferrata avec Rock'n Jump Adventure</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Plus vertigineux que la randonnée mais plus accessible que l'escalade, grâce à la via ferrata dans le Jura, accédez aux endroits les plus reculés ! L'occasion de traverser ponts de singe, tyroliennes, échelles, ponts népalais…</div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">Tarif unique : à partir de 40 € (en fonction du parcours choisi)</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Toute l'année, tous les jours.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.hautbugey-tourisme.com/activite/via-ferrata-avec-rockn-jump-adventure/" target="_blank">hautbugey-tourisme.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. CANYONING, ESCALADE, VIA FERRATA - ROCK'N JUMP ADVENTURE -->
+        <div class="activity" id="act-8">
+            <div class="activity-name">Canyoning, Escalade, Via Ferrata avec Rock'n Jump Adventure</div>
+            <div class="activity-intro">
+                <div class="activity-desc">Rock'n Jump Adventure vous emmène faire de l'escalade en falaise et en salle dans le Jura, la Haute-Savoie et le Pays de Gex. Prenez de la hauteur et voyez le monde d'un autre angle ! Escalade en couennes, grandes voies, terrain d'aventure et blocs.</div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">Tarif unique : à partir de 23 € (en fonction de la formule choisie)</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">Toute l'année sur réservation.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.hautbugey-tourisme.com/activite/escalade-avec-rockn-jump-adventure/" target="_blank">hautbugey-tourisme.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+        <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+        <p style="margin-top: 15px; opacity: 0.8; font-size: 12px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function showActivity(index) {
+            document.querySelectorAll('.activity').forEach(a => a.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('act-' + index).classList.add('active');
+            document.querySelectorAll('.tab')[index].classList.add('active');
+            document.querySelectorAll('.tab')[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    </script>
+
+</body>
+</html>
