@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités à faire - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-blue-dark: #2a9ec4;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        .back-button:hover { background: rgba(255,255,255,0.3); }
+        header h1 { font-size: 28px; font-weight: 700; }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 44px 20px 20px;
+        }
+
+        /* ===== INTRO ===== */
+        .detail-info { text-align: center; margin-bottom: 40px; }
+        .detail-info h2 {
+            font-size: 30px;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+        .detail-info p {
+            color: var(--text-light);
+            font-size: 16px;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        /* ===== BUBBLES ===== */
+        .bubble-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            margin-bottom: 50px;
+        }
+        .bubble {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease;
+        }
+        .bubble:hover { transform: translateY(-8px); }
+        .bubble-image {
+            position: relative;
+            width: 100%;
+            height: 210px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            box-shadow: 0 8px 24px rgba(20,40,60,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        /* icône de repli (visible si la photo n'est pas encore déposée) */
+        .bubble-image::before {
+            content: attr(data-emoji);
+            font-size: 70px;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+        }
+        .bubble-image img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .bubble:hover .bubble-image img { transform: scale(1.06); }
+        .bubble-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* ===== INFO CARD ===== */
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border-top: 4px solid var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 22px;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-item {
+            margin-bottom: 18px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .info-item:last-child { margin-bottom: 0; }
+        .info-item-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+        .info-item-content { flex: 1; }
+        .info-item-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+            font-size: 15px;
+        }
+        .info-item-value {
+            color: var(--text-light);
+            font-size: 13.5px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        footer p { margin-bottom: 10px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+
+        @media (max-width: 600px) {
+            .bubble-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+            .bubble-image { height: 150px; }
+            .bubble-image::before { font-size: 52px; }
+            .detail-info h2 { font-size: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="back-button" onclick="window.location.href='index.html'">←</button>
+            <h1>Activités à faire</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="detail-info">
+            <h2>Activités à faire</h2>
+            <p>Découvrez toutes les activités disponibles près du camping pour profiter au maximum de votre séjour !</p>
+        </div>
+
+        <div class="bubble-grid">
+            <a href="activites-plein-air.html" class="bubble">
+                <div class="bubble-image" data-emoji="🏃">
+                    <img src="images/cat-plein-air.jpg" alt="Plein Air" onerror="this.style.display='none'">
+                </div>
+                <div class="bubble-title">Plein Air</div>
+            </a>
+
+            <a href="activites-nautiques.html" class="bubble">
+                <div class="bubble-image" data-emoji="🚣">
+                    <img src="images/cat-nautiques.jpg" alt="Nautiques" onerror="this.style.display='none'">
+                </div>
+                <div class="bubble-title">Nautiques</div>
+            </a>
+
+            <a href="activites-interieur.html" class="bubble">
+                <div class="bubble-image" data-emoji="🎳">
+                    <img src="images/cat-interieur.jpg" alt="Intérieur" onerror="this.style.display='none'">
+                </div>
+                <div class="bubble-title">Intérieur</div>
+            </a>
+        </div>
+
+        <div class="info-card">
+            <h3>Informations</h3>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Toute l'année</div>
+                    <div class="info-item-value">Activités disponibles selon la saison</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Tous les âges</div>
+                    <div class="info-item-value">Activités familiales et pour enfants</div>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-item-icon">✓</div>
+                <div class="info-item-content">
+                    <div class="info-item-label">Avec ou sans réservation</div>
+                    <div class="info-item-value">Consultez la réception pour les détails</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+        <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+        <p style="margin-top: 15px; opacity: 0.8; font-size: 12px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
