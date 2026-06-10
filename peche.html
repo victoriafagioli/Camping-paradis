@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pêche - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --primary-green: #2d5016;
+            --accent-orange: #FF8C00;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        /* ===== TABS ===== */
+        .tabs-wrapper {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 66px;
+            z-index: 99;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .tabs {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab {
+            background: none;
+            border: 1.5px solid #ddd;
+            color: var(--text-dark);
+            padding: 7px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .tab:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
+        .tab.active {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        /* ===== ACTIVITY CARD ===== */
+        .activity { display: none; }
+        .activity.active { display: block; }
+        .activity-name {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+        }
+        .activity-intro { margin-bottom: 24px; }
+        .activity-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        .activity-desc p { margin-bottom: 10px; }
+        .activity-desc p:last-child { margin-bottom: 0; }
+        .activity-meta {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            background: #f0f8ff;
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        /* ===== INFO BLOCK ===== */
+        .info-block {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .info-row {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            background: #f0f8ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .info-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .info-value a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        .info-value a:hover { text-decoration: underline; }
+        .info-subtitle { font-weight: 600; color: var(--text-dark); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%);
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+        footer p { margin-bottom: 8px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a class="back-button" href="index.html">←</a>
+            <h1>Pêche</h1>
+        </div>
+    </header>
+
+    <div class="tabs-wrapper">
+        <div class="tabs" id="tabs">
+            <button class="tab active" onclick="showActivity(0)">Pêcher dans le Haut-Bugey</button>
+            <button class="tab" onclick="showActivity(1)">Pêcher aux plans d'eau du Genevray</button>
+            <button class="tab" onclick="showActivity(2)">Pêcher au plan d'eau des Lésines</button>
+            <button class="tab" onclick="showActivity(3)">Pêcher autour d'Izernore</button>
+            <button class="tab" onclick="showActivity(4)">Pêcher au lac de Nantua</button>
+            <button class="tab" onclick="showActivity(5)">Pêcher au lac Genin</button>
+            <button class="tab" onclick="showActivity(6)">Pêcher à l'étang de Buynand</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- 0. PÊCHER DANS LE HAUT-BUGEY -->
+        <div class="activity active" id="act-0">
+            <div class="activity-name">Pêcher dans le Haut-Bugey</div>
+            <div class="activity-intro">
+                <div class="activity-desc">
+                    <p>L'association de pêche Rivières et Lacs du Haut Bugey gère le Lange et l'Oignin (sauf le secteur d'Izernore), les lacs locaux dont le lac de Sylans (sauf le lac de Nantua et le lac Genin) et certains secteurs de la Rivière d'Ain (lot A24).</p>
+                    <p>Cartes de pêche en vente à l'Office de Tourisme et sur le site internet www.cartedepeche.fr</p>
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">🕐</div>
+                    <div class="info-content">
+                        <div class="info-label">Ouverture</div>
+                        <div class="info-value">Du 01/01 au 31/12</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            <span class="info-subtitle">Avec timbre CPMA</span><br>
+                            • Carte annuelle : 23 €<br>
+                            • Carte journalière : 13 €<br>
+                            • Carte hebdomadaire : 35 €<br>
+                            • Carte découverte femme : 40 €<br>
+                            • Gratuit pour les enfants de moins de 12 ans (remboursement des cartes acquises sur Internet)<br>
+                            <br>
+                            <span class="info-subtitle">Sans timbre CPMA</span><br>
+                            • Carte annuelle adulte : 44,80 €<br>
+                            • Carte annuelle 12-18 ans : 17,80 €<br>
+                            • Carte découverte femme : 21,80 €<br>
+                            • Carte annuelle -12 ans : 8,10 €<br>
+                            • Carte hebdomadaire : 21,00 €
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">En fonction des dates d'ouverture et de fermeture de la pêche des différentes espèces présentes sur nos secteurs.</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.cartedepeche.fr" target="_blank">cartedepeche.fr</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. PÊCHER AUX PLANS D'EAU DU GENEVRAY -->
+        <div class="activity" id="act-1">
+            <div class="activity-name">Pêcher aux plans d'eau du Genevray</div>
+            <div class="activity-intro">
+                <div class="activity-desc">
+                    <p>Les Plans d'eau du Genevray à Thézillieu sont riches en carpes, brochets, gardons, tanches, truites… qui sont tous des poissons d'étangs de qualité. Un ponton est spécialement aménagé pour les personnes à mobilité réduite.</p>
+                    <p>Au Genevray, deux étangs cisterciens de l'Abbaye de Saint-Sulpice ont été construits à main d'homme en l'an 1234. Ces deux plans d'eau sont de tailles respectables : 2,7 hectares en bas et 4,7 hectares en haut de la chute. Les cartes sont vendues au Relais de Thézillieu, au Vival à Cormaranche, à la Cave Pellio à Hauteville ou chez le Président Roger Tournier au Genevray.</p>
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">🕐</div>
+                    <div class="info-content">
+                        <div class="info-label">Ouverture</div>
+                        <div class="info-value">
+                            Du 30/03 au 31/12.<br>
+                            Fermeture de la saison au gel des étangs.
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : 40 € (à l'année)<br>
+                            Enfant (6-14 ans) : 20 € (à l'année)<br>
+                            Carte journalière : 10 € (adulte)<br>
+                            30 € le mois pour adulte<br>
+                            15 € le mois pour enfant 6-14 ans<br>
+                            5 € la journée enfant 6-14 ans
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.hautbugey-tourisme.com/equipement/pecher-aux-plans-deau-du-genevray/" target="_blank">hautbugey-tourisme.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. PÊCHER AU PLAN D'EAU DES LÉSINES -->
+        <div class="activity" id="act-2">
+            <div class="activity-name">Pêcher au plan d'eau des Lésines</div>
+            <div class="activity-intro">
+                <div class="activity-desc">
+                    <p>Cadre idéal pour la pêche au coup, au lancer ou encore à l'anglaise, ce plan d'eau abrite également brèmes et perches. Les enfants de moins de 10 ans sont autorisés à pêcher gratuitement à une seule canne à condition d'être accompagnés d'un parent muni d'une carte de la société.</p>
+                    <p>Lieu de vente de la carte de pêche : Caveau Pelfio - Hauteville Lompnes / Vival - Cormaranche en Bugey.</p>
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Gratuit pour les moins de 10 ans<br>
+                            Année - adulte : 42 €<br>
+                            Année - moins de 16 ans : 25 €<br>
+                            Journée - adulte : 15 €<br>
+                            Journée - moins de 16 ans : 10 €<br>
+                            <br>
+                            <span class="info-subtitle">Suppléments</span><br>
+                            15 € pêche en barque<br>
+                            35 € pêche de nuit (uniquement les week-ends)
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">
+                            Du 16/03 au 15/12.<br>
+                            Ouverture le 3ème samedi de mai pour les carnassiers et la pêche en barque.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. PÊCHER AUTOUR D'IZERNORE -->
+        <div class="activity" id="act-3">
+            <div class="activity-name">Pêcher autour d'Izernore</div>
+            <div class="activity-intro">
+                <div class="activity-desc">
+                    <p>La Gaule Romaine gère 5 km de rivière de 1ère catégorie sur l'Oignin, depuis Pont Royat sur la D979 (commune de Béard-Géovreissiat) jusqu'à l'usine des Tréballes (commune d'Izernore). Les pêcheurs y rencontreront ombres et truites.</p>
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">
+                            Se référer aux dates d'ouverture de pêche selon les catégories de poissons.<br>
+                            La pêche est interdite le vendredi sur le secteur de la Gaule Romaine.
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.cartedepeche.fr" target="_blank">cartedepeche.fr</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. PÊCHER AU LAC DE NANTUA -->
+        <div class="activity" id="act-4">
+            <div class="activity-name">Pêcher au lac de Nantua</div>
+            <div class="activity-intro">
+                <div class="activity-desc">
+                    <p>Le lac de Nantua (plus grand lac naturel de l'Ain) mais aussi la Doye (1ère cat.), le Merloz (1ère et 2ème cat.) et le bras du lac offrent des sites de pêche regorgeant de corégones, truites de lac, perches, carpes et brochets.</p>
+                    <p>Cartes de pêche en vente à l'Office de Tourisme et sur www.cartedepeche.fr</p>
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : 85 €<br>
+                            Adolescent (12-18 ans) : 22,50 €<br>
+                            Carte journalière : 12 €<br>
+                            Carte hebdomadaire : 35 €<br>
+                            Carte découverte femme : 40 €<br>
+                            Carte découverte -12 ans : 7 €<br>
+                            Carte interfédérale EHGO : 100 €
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">
+                            Se référer aux dates d'ouverture de pêche selon les catégories de poissons :<br>
+                            Brochet : du 1ᵉʳ janvier au 28 mai et jusqu'au 31 décembre<br>
+                            Truite fario / omble chevalier : du 12 mars au 18 septembre<br>
+                            Corégone : du 12 mars au 23 octobre
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.cartedepeche.fr" target="_blank">cartedepeche.fr</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. PÊCHER AU LAC GENIN -->
+        <div class="activity" id="act-5">
+            <div class="activity-name">Pêcher au lac Genin</div>
+            <div class="activity-intro">
+                <div class="activity-desc">
+                    <p>Au lac Genin, vous auriez peut-être la chance de remonter brochets, carpes, perches, tanches, gardons, truites… La pêche se pratique au lac du 3ème samedi d'avril à début novembre.</p>
+                    <p>Cartes de pêche en vente à l'Auberge du lac Genin.</p>
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : 30 € (la saison)<br>
+                            Enfant : 15 € (la saison, pour les - de 15 ans)<br>
+                            Carte journalière : 7 € (en vente à partir du 15 juin)
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">
+                            Du 20/04 au 04/11. Sauf le 1ᵉʳ vendredi de chaque mois, septembre compris, et le 22 juin au matin (concours de pêche).
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="http://lesamispecheursdulacgenin.jimdo.com" target="_blank">lesamispecheursdulacgenin.jimdo.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. PÊCHER À L'ÉTANG DE BUYNAND -->
+        <div class="activity" id="act-6">
+            <div class="activity-name">Pêcher à l'étang de Buynand</div>
+            <div class="activity-intro">
+                <div class="activity-desc">
+                    <p>Lieu idéal pour pêcher en famille car facile d'accès. Certaines espèces y sont présentes : carpes, tanches, brochets, perches, gardons, truites…</p>
+                    <p>Les cartes sont en vente :<br>
+                    - à l'auberge Campagnarde à Evosges (fermée le mercredi)<br>
+                    - sur le site web de la mairie www.evosges.fr</p>
+                </div>
+            </div>
+            <div class="info-block">
+                <div class="info-row">
+                    <div class="info-icon">💶</div>
+                    <div class="info-content">
+                        <div class="info-label">Prix</div>
+                        <div class="info-value">
+                            Adulte : 45 € (l'année)<br>
+                            Enfant (10-13 ans) : 20 €<br>
+                            Carte journalière : de 5 à 10 € (5 € enfant de 6 à 14 ans, 10 € adulte)<br>
+                            Carte hebdomadaire : 30 €<br>
+                            Gratuit pour les enfants de moins de 10 ans accompagnés d'un tiers détenteur d'une carte de pêche (1 canne au coup / 2 enfants maxi par détenteur de carte)
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">📅</div>
+                    <div class="info-content">
+                        <div class="info-label">Dates</div>
+                        <div class="info-value">
+                            Du 26/03 au 13/11.<br>
+                            Fermeture pour alevinage :<br>
+                            - du 11 au 15 avril inclus<br>
+                            - du 23 au 25 mai inclus
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-label">Site web</div>
+                        <div class="info-value"><a href="https://www.evosges.fr" target="_blank">evosges.fr</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+        <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+        <p style="margin-top: 15px; opacity: 0.8; font-size: 12px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function showActivity(index) {
+            document.querySelectorAll('.activity').forEach(a => a.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('act-' + index).classList.add('active');
+            document.querySelectorAll('.tab')[index].classList.add('active');
+            document.querySelectorAll('.tab')[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    </script>
+
+</body>
+</html>
