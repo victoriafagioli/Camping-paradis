@@ -1,5 +1,5 @@
 /* Camping Paradis — dictionnaire DE
-   Clé = texte français exact (espaces normalisés). */
+   Cle: texte francais exact (espaces normalises). */
 window.CP_I18N = window.CP_I18N || {};
 window.CP_I18N['de'] = {
   "Installer l'application": "App installieren",
@@ -156,5 +156,39 @@ window.CP_I18N['de'] = {
   "Pour qu'on vous rappelle si besoin": "Damit wir Sie bei Bedarf zurückrufen können",
   "Rechercher une page, un service, une activité…": "Seite, Service oder Aktivität suchen…",
   "Écrivez votre question…": "Schreiben Sie Ihre Frage…",
-  "Numéro uniquement": "Nur Zahlen"
+  "Numéro uniquement": "Nur Zahlen",
+  "Supermarchés": "Supermärkte",
+  "Santé": "Gesundheit",
+  "Petits Commerces": "Kleine Geschäfte",
+  "Grandes surfaces et courses du quotidien": "Supermärkte und tägliche Einkäufe",
+  "Pharmacie, médecins et urgences": "Apotheke, Ärzte und Notfälle",
+  "Boulangerie, tabac et presse à Izernore": "Bäckerei, Tabakladen und Zeitungen in Izernore",
+  "← Toutes les catégories": "← Alle Kategorien",
+  "Adresse": "Adresse",
+  "Horaires": "Öffnungszeiten",
+  "Téléphone": "Telefon",
+  "Site web": "Webseite",
+  "💡 Pour le dépannage, pensez aussi à": "💡 Für den kleinen Einkauf gibt es auch",
+  "l'épicerie du camping": "den Laden auf dem Campingplatz",
+  "Supermarché complet avec rayon boulangerie, le plus pratique pour les grosses courses.": "Vollwertiger Supermarkt mit Backwarenabteilung, am praktischsten für den Großeinkauf.",
+  "Pratique au retour du lac de Nantua. Espace dédié aux camping-cars à côté du magasin.": "Praktisch auf dem Rückweg vom See von Nantua. Wohnmobil-Bereich direkt neben dem Markt.",
+  "Le plus grand choix de la région (hypermarché), avec station-service.": "Die größte Auswahl der Region (Hypermarkt), mit Tankstelle.",
+  "Enseigne discount bien connue de nos vacanciers européens.": "Eine Discounter-Kette, die unsere europäischen Gäste gut kennen.",
+  "La pharmacie la plus proche du camping. Équipe accueillante et de bon conseil.": "Die nächstgelegene Apotheke zum Campingplatz. Freundliches Team mit guter Beratung.",
+  "Maison de santé regroupant médecins généralistes et autres praticiens.": "Gesundheitszentrum mit Allgemeinärzten und weiteren Praxen.",
+  "Le service d'urgences le plus proche du camping.": "Die nächstgelegene Notaufnahme zum Campingplatz.",
+  "Numéros d'urgence :": "Notrufnummern:",
+  "15 (SAMU) · 112 (urgences européennes) · 3237 (pharmacie de garde)": "15 (SAMU Rettungsdienst) · 112 (europäischer Notruf) · 3237 (Notdienst-Apotheke)",
+  "En cas de besoin, la réception du camping est là pour vous aider :": "Bei Bedarf hilft Ihnen die Rezeption des Campingplatzes gerne:",
+  "🥐 Pain frais et viennoiseries disponibles chaque matin": "🥐 Frisches Brot und Gebäck jeden Morgen erhältlich",
+  "au camping": "auf dem Campingplatz",
+  "Boulangerie artisanale : pains, pâtisseries et petit salon de thé avec terrasse.": "Handwerksbäckerei: Brot, Gebäck und ein kleines Café mit Terrasse.",
+  "Tabac, presse, jeux, souvenirs et petit dépannage alimentaire.": "Tabak, Zeitungen, Spiele, Souvenirs und kleine Lebensmittelauswahl.",
+  "Lun–Sam : 8h30–19h30 · Dim : 9h–12h30": "Mo–Sa: 8:30–19:30 · So: 9:00–12:30",
+  "Lun–Sam : 8h30–20h · Dim : 8h30–12h30": "Mo–Sa: 8:30–20:00 · So: 8:30–12:30",
+  "Lun–Sam : 8h–20h · Dim : 8h–12h15": "Mo–Sa: 8:00–20:00 · So: 8:00–12:15",
+  "Lun–Ven : 8h45–12h15 / 14h45–19h · Sam : 8h45–12h30": "Mo–Fr: 8:45–12:15 / 14:45–19:00 · Sa: 8:45–12:30",
+  "Lun–Ven : 8h–18h": "Mo–Fr: 8:00–18:00",
+  "Lun, Mar, Jeu–Sam : 6h–19h · Dim : 6h–13h · Fermé le mercredi": "Mo, Di, Do–Sa: 6:00–19:00 · So: 6:00–13:00 · Mittwochs geschlossen",
+  "Lun–Sam : 6h30–12h30 / 15h–19h · Dim : 7h–12h30": "Mo–Sa: 6:30–12:30 / 15:00–19:00 · So: 7:00–12:30"
 };

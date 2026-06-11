@@ -1,5 +1,5 @@
 /* Camping Paradis — dictionnaire EN
-   Clé = texte français exact (espaces normalisés). */
+   Cle: texte francais exact (espaces normalises). */
 window.CP_I18N = window.CP_I18N || {};
 window.CP_I18N['en'] = {
   "Installer l'application": "Install the app",
@@ -156,5 +156,39 @@ window.CP_I18N['en'] = {
   "Pour qu'on vous rappelle si besoin": "So we can call you back if needed",
   "Rechercher une page, un service, une activité…": "Search for a page, service or activity…",
   "Écrivez votre question…": "Type your question…",
-  "Numéro uniquement": "Numbers only"
+  "Numéro uniquement": "Numbers only",
+  "Supermarchés": "Supermarkets",
+  "Santé": "Health",
+  "Petits Commerces": "Local shops",
+  "Grandes surfaces et courses du quotidien": "Supermarkets and everyday shopping",
+  "Pharmacie, médecins et urgences": "Pharmacy, doctors and emergencies",
+  "Boulangerie, tabac et presse à Izernore": "Bakery, tobacconist and newsagent in Izernore",
+  "← Toutes les catégories": "← All categories",
+  "Adresse": "Address",
+  "Horaires": "Opening hours",
+  "Téléphone": "Phone",
+  "Site web": "Website",
+  "💡 Pour le dépannage, pensez aussi à": "💡 For quick top-up shopping, don't forget",
+  "l'épicerie du camping": "the campsite grocery shop",
+  "Supermarché complet avec rayon boulangerie, le plus pratique pour les grosses courses.": "Full supermarket with a bakery section, the most convenient for big shopping trips.",
+  "Pratique au retour du lac de Nantua. Espace dédié aux camping-cars à côté du magasin.": "Convenient on the way back from Lake Nantua. Dedicated motorhome area next to the shop.",
+  "Le plus grand choix de la région (hypermarché), avec station-service.": "The widest choice in the area (hypermarket), with a petrol station.",
+  "Enseigne discount bien connue de nos vacanciers européens.": "A discount chain well known to our European guests.",
+  "La pharmacie la plus proche du camping. Équipe accueillante et de bon conseil.": "The closest pharmacy to the campsite. Friendly and helpful team.",
+  "Maison de santé regroupant médecins généralistes et autres praticiens.": "Health centre with general practitioners and other practitioners.",
+  "Le service d'urgences le plus proche du camping.": "The closest emergency department to the campsite.",
+  "Numéros d'urgence :": "Emergency numbers:",
+  "15 (SAMU) · 112 (urgences européennes) · 3237 (pharmacie de garde)": "15 (SAMU ambulance) · 112 (European emergency number) · 3237 (on-duty pharmacy)",
+  "En cas de besoin, la réception du camping est là pour vous aider :": "If you need help, the campsite reception is here for you:",
+  "🥐 Pain frais et viennoiseries disponibles chaque matin": "🥐 Fresh bread and pastries available every morning",
+  "au camping": "at the campsite",
+  "Boulangerie artisanale : pains, pâtisseries et petit salon de thé avec terrasse.": "Artisan bakery: breads, pastries and a small tea room with terrace.",
+  "Tabac, presse, jeux, souvenirs et petit dépannage alimentaire.": "Tobacconist, newsagent, games, souvenirs and basic groceries.",
+  "Lun–Sam : 8h30–19h30 · Dim : 9h–12h30": "Mon–Sat: 8:30am–7:30pm · Sun: 9am–12:30pm",
+  "Lun–Sam : 8h30–20h · Dim : 8h30–12h30": "Mon–Sat: 8:30am–8pm · Sun: 8:30am–12:30pm",
+  "Lun–Sam : 8h–20h · Dim : 8h–12h15": "Mon–Sat: 8am–8pm · Sun: 8am–12:15pm",
+  "Lun–Ven : 8h45–12h15 / 14h45–19h · Sam : 8h45–12h30": "Mon–Fri: 8:45am–12:15pm / 2:45–7pm · Sat: 8:45am–12:30pm",
+  "Lun–Ven : 8h–18h": "Mon–Fri: 8am–6pm",
+  "Lun, Mar, Jeu–Sam : 6h–19h · Dim : 6h–13h · Fermé le mercredi": "Mon, Tue, Thu–Sat: 6am–7pm · Sun: 6am–1pm · Closed on Wednesdays",
+  "Lun–Sam : 6h30–12h30 / 15h–19h · Dim : 7h–12h30": "Mon–Sat: 6:30am–12:30pm / 3–7pm · Sun: 7am–12:30pm"
 };

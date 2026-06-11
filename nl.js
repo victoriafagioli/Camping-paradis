@@ -1,5 +1,5 @@
 /* Camping Paradis — dictionnaire NL
-   Clé = texte français exact (espaces normalisés). */
+   Cle: texte francais exact (espaces normalises). */
 window.CP_I18N = window.CP_I18N || {};
 window.CP_I18N['nl'] = {
   "Installer l'application": "Installeer de app",
@@ -156,5 +156,39 @@ window.CP_I18N['nl'] = {
   "Pour qu'on vous rappelle si besoin": "Zodat we u indien nodig kunnen terugbellen",
   "Rechercher une page, un service, une activité…": "Zoek een pagina, dienst of activiteit…",
   "Écrivez votre question…": "Typ uw vraag…",
-  "Numéro uniquement": "Alleen cijfers"
+  "Numéro uniquement": "Alleen cijfers",
+  "Supermarchés": "Supermarkten",
+  "Santé": "Gezondheid",
+  "Petits Commerces": "Kleine winkels",
+  "Grandes surfaces et courses du quotidien": "Supermarkten en dagelijkse boodschappen",
+  "Pharmacie, médecins et urgences": "Apotheek, artsen en spoedgevallen",
+  "Boulangerie, tabac et presse à Izernore": "Bakkerij, tabakszaak en kiosk in Izernore",
+  "← Toutes les catégories": "← Alle categorieën",
+  "Adresse": "Adres",
+  "Horaires": "Openingstijden",
+  "Téléphone": "Telefoon",
+  "Site web": "Website",
+  "💡 Pour le dépannage, pensez aussi à": "💡 Voor kleine boodschappen is er ook",
+  "l'épicerie du camping": "het campingwinkeltje",
+  "Supermarché complet avec rayon boulangerie, le plus pratique pour les grosses courses.": "Volledige supermarkt met bakkerijafdeling, het handigst voor grote boodschappen.",
+  "Pratique au retour du lac de Nantua. Espace dédié aux camping-cars à côté du magasin.": "Handig op de terugweg van het meer van Nantua. Speciale camperplaats naast de winkel.",
+  "Le plus grand choix de la région (hypermarché), avec station-service.": "De grootste keuze van de regio (hypermarkt), met tankstation.",
+  "Enseigne discount bien connue de nos vacanciers européens.": "Een discountketen die onze Europese gasten goed kennen.",
+  "La pharmacie la plus proche du camping. Équipe accueillante et de bon conseil.": "De dichtstbijzijnde apotheek bij de camping. Vriendelijk team met goed advies.",
+  "Maison de santé regroupant médecins généralistes et autres praticiens.": "Gezondheidscentrum met huisartsen en andere zorgverleners.",
+  "Le service d'urgences le plus proche du camping.": "De dichtstbijzijnde spoedeisende hulp bij de camping.",
+  "Numéros d'urgence :": "Alarmnummers:",
+  "15 (SAMU) · 112 (urgences européennes) · 3237 (pharmacie de garde)": "15 (SAMU ambulance) · 112 (Europees alarmnummer) · 3237 (dienstapotheek)",
+  "En cas de besoin, la réception du camping est là pour vous aider :": "Hulp nodig? De receptie van de camping staat voor u klaar:",
+  "🥐 Pain frais et viennoiseries disponibles chaque matin": "🥐 Vers brood en croissants elke ochtend verkrijgbaar",
+  "au camping": "op de camping",
+  "Boulangerie artisanale : pains, pâtisseries et petit salon de thé avec terrasse.": "Ambachtelijke bakkerij: brood, gebak en een klein theesalon met terras.",
+  "Tabac, presse, jeux, souvenirs et petit dépannage alimentaire.": "Tabak, kranten, spellen, souvenirs en wat basisproducten.",
+  "Lun–Sam : 8h30–19h30 · Dim : 9h–12h30": "Ma–za: 8.30–19.30 · Zo: 9.00–12.30",
+  "Lun–Sam : 8h30–20h · Dim : 8h30–12h30": "Ma–za: 8.30–20.00 · Zo: 8.30–12.30",
+  "Lun–Sam : 8h–20h · Dim : 8h–12h15": "Ma–za: 8.00–20.00 · Zo: 8.00–12.15",
+  "Lun–Ven : 8h45–12h15 / 14h45–19h · Sam : 8h45–12h30": "Ma–vr: 8.45–12.15 / 14.45–19.00 · Za: 8.45–12.30",
+  "Lun–Ven : 8h–18h": "Ma–vr: 8.00–18.00",
+  "Lun, Mar, Jeu–Sam : 6h–19h · Dim : 6h–13h · Fermé le mercredi": "Ma, di, do–za: 6.00–19.00 · Zo: 6.00–13.00 · Woensdag gesloten",
+  "Lun–Sam : 6h30–12h30 / 15h–19h · Dim : 7h–12h30": "Ma–za: 6.30–12.30 / 15.00–19.00 · Zo: 7.00–12.30"
 };
