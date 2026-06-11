@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan du camping - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); line-height: 1.6; background: var(--bg-light); }
+
+        header { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 900px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 15px; }
+        .back-button { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 22px; cursor: pointer; padding: 8px 14px; border-radius: 6px; transition: background 0.3s; text-decoration: none; }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+
+        .panel-title { font-size: 22px; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+
+        .text-block { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 24px 28px; margin-bottom: 20px; }
+        .text-block p { font-size: 14px; color: var(--text-light); line-height: 1.8; }
+
+        /* ===== Visionneuse du plan ===== */
+        .plan-viewer {
+            position: relative;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            overflow: hidden;
+            margin-bottom: 20px;
+            height: 70vh;
+            min-height: 350px;
+            touch-action: none;
+        }
+        .plan-stage {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            overflow: hidden;
+        }
+        .plan-stage:active { cursor: grabbing; }
+        .plan-stage img {
+            max-width: 100%;
+            max-height: 100%;
+            user-select: none;
+            -webkit-user-drag: none;
+            transform-origin: center center;
+            will-change: transform;
+        }
+        .zoom-controls {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10;
+        }
+        .zoom-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: background 0.2s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .zoom-btn:hover { background: #2a9ec4; }
+        .zoom-btn:active { transform: scale(0.92); }
+        .zoom-btn.reset { font-size: 16px; }
+        .zoom-hint {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            font-size: 12px;
+            padding: 7px 16px;
+            border-radius: 20px;
+            z-index: 10;
+            pointer-events: none;
+            transition: opacity 0.6s;
+            white-space: nowrap;
+        }
+        .zoom-hint.hidden { opacity: 0; }
+
+        .highlight-box { background: linear-gradient(135deg, #e8f7fd 0%, #f0faff 100%); border-left: 4px solid var(--primary-blue); border-radius: 0 12px 12px 0; padding: 18px 22px; margin-bottom: 20px; }
+        .highlight-box p { font-size: 14px; color: var(--text-dark); line-height: 1.8; }
+
+        footer { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 35px 20px; text-align: center; }
+        footer p { margin-bottom: 8px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a class="back-button" href="index.html">←</a>
+        <h1>Plan du camping</h1>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="panel-title">Plan du camping</div>
+
+    <div class="text-block">
+        <p>Retrouvez facilement votre emplacement, les sanitaires, la piscine, le snack-bar et tous les équipements du camping grâce au plan ci-dessous. Zoomez pour voir les numéros d'emplacements en détail.</p>
+    </div>
+
+    <div class="plan-viewer" id="planViewer">
+        <div class="zoom-hint" id="zoomHint">🔍 Pincez ou utilisez les boutons pour zoomer</div>
+        <div class="plan-stage" id="planStage">
+            <img src="images/plan-camping.jpg" alt="Plan du Camping Paradis - Les Gorges du Haut Bugey" id="planImg">
+        </div>
+        <div class="zoom-controls">
+            <button class="zoom-btn" id="zoomIn" aria-label="Zoomer">+</button>
+            <button class="zoom-btn" id="zoomOut" aria-label="Dézoomer">−</button>
+            <button class="zoom-btn reset" id="zoomReset" aria-label="Réinitialiser">⟲</button>
+        </div>
+    </div>
+
+    <div class="highlight-box">
+        <p>💡 <strong>Besoin d'aide pour vous repérer ?</strong> N'hésitez pas à passer à la réception, notre équipe vous indiquera le chemin avec plaisir !</p>
+    </div>
+
+</div>
+
+<footer>
+    <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+    <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+    <p style="margin-top:15px; opacity:0.8; font-size:12px;">&copy; 2026 Tous droits réservés.</p>
+</footer>
+
+<script>
+(function() {
+    const img = document.getElementById('planImg');
+    const stage = document.getElementById('planStage');
+    const hint = document.getElementById('zoomHint');
+
+    let scale = 1, posX = 0, posY = 0;
+    const MIN = 1, MAX = 6;
+
+    function apply() {
+        img.style.transform = 'translate(' + posX + 'px,' + posY + 'px) scale(' + scale + ')';
+    }
+    function clampPos() {
+        const limX = (img.clientWidth * (scale - 1)) / 2;
+        const limY = (img.clientHeight * (scale - 1)) / 2;
+        posX = Math.max(-limX, Math.min(limX, posX));
+        posY = Math.max(-limY, Math.min(limY, posY));
+    }
+    function setScale(s) {
+        scale = Math.max(MIN, Math.min(MAX, s));
+        if (scale === 1) { posX = 0; posY = 0; }
+        clampPos();
+        apply();
+    }
+    function hideHint() { hint.classList.add('hidden'); }
+    setTimeout(hideHint, 4000);
+
+    // Boutons
+    document.getElementById('zoomIn').addEventListener('click', () => { setScale(scale * 1.5); hideHint(); });
+    document.getElementById('zoomOut').addEventListener('click', () => { setScale(scale / 1.5); hideHint(); });
+    document.getElementById('zoomReset').addEventListener('click', () => { setScale(1); });
+
+    // Molette (desktop)
+    stage.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        setScale(scale * (e.deltaY < 0 ? 1.15 : 0.87));
+        hideHint();
+    }, { passive: false });
+
+    // Glisser (souris)
+    let dragging = false, lastX = 0, lastY = 0;
+    stage.addEventListener('mousedown', (e) => {
+        if (scale <= 1) return;
+        dragging = true; lastX = e.clientX; lastY = e.clientY;
+        e.preventDefault();
+    });
+    window.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        posX += e.clientX - lastX;
+        posY += e.clientY - lastY;
+        lastX = e.clientX; lastY = e.clientY;
+        clampPos(); apply();
+    });
+    window.addEventListener('mouseup', () => { dragging = false; });
+
+    // Tactile : pincement + déplacement + double-tap
+    let touches = [], startDist = 0, startScale = 1, lastTap = 0;
+
+    function dist(t1, t2) {
+        return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+    }
+
+    stage.addEventListener('touchstart', (e) => {
+        hideHint();
+        if (e.touches.length === 2) {
+            startDist = dist(e.touches[0], e.touches[1]);
+            startScale = scale;
+        } else if (e.touches.length === 1) {
+            lastX = e.touches[0].clientX;
+            lastY = e.touches[0].clientY;
+            // Double-tap pour zoomer / réinitialiser
+            const now = Date.now();
+            if (now - lastTap < 300) {
+                setScale(scale > 1 ? 1 : 2.5);
+            }
+            lastTap = now;
+        }
+    }, { passive: true });
+
+    stage.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            const d = dist(e.touches[0], e.touches[1]);
+            setScale(startScale * (d / startDist));
+        } else if (e.touches.length === 1 && scale > 1) {
+            e.preventDefault();
+            posX += e.touches[0].clientX - lastX;
+            posY += e.touches[0].clientY - lastY;
+            lastX = e.touches[0].clientX;
+            lastY = e.touches[0].clientY;
+            clampPos(); apply();
+        }
+    }, { passive: false });
+})();
+</script>
+
+</body>
+</html>
