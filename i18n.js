@@ -40,7 +40,7 @@
   function loadDict(lang, cb) {
     if (lang === 'fr' || window.CP_I18N[lang]) { cb(); return; }
     var s = document.createElement('script');
-    s.src = 'i18n/' + lang + '.js';
+    s.src = lang + '.js';
     s.onload = cb;
     s.onerror = function () { console.warn('[i18n] dictionnaire introuvable :', lang); cb(); };
     document.head.appendChild(s);
