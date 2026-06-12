@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randonnées dans le Jura - Camping Paradis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #34BDEF;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); line-height: 1.6; background: var(--bg-light); }
+
+        header { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 900px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; gap: 15px; }
+        .back-button { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 22px; cursor: pointer; padding: 8px 14px; border-radius: 6px; transition: background 0.3s; text-decoration: none; }
+        .back-button:hover { background: rgba(255,255,255,0.35); }
+        header h1 { font-size: 24px; font-weight: 700; }
+
+        /* Onglets avec flèches */
+        .tabs-wrapper { background: white; border-bottom: 1px solid #e0e0e0; position: sticky; top: 64px; z-index: 99; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .tabs-outer { max-width: 900px; margin: 0 auto; padding: 12px 0; display: flex; align-items: center; gap: 4px; }
+        .tab-arrow { background: none; border: none; color: var(--primary-blue); font-size: 20px; cursor: pointer; padding: 6px 10px; flex-shrink: 0; line-height: 1; }
+        .tab-arrow:disabled { opacity: 0.3; cursor: default; }
+        .tabs-scroll { overflow: hidden; flex: 1; }
+        .tabs { display: flex; gap: 8px; transition: transform 0.3s ease; padding: 2px 0; }
+        .tab { background: none; border: 1.5px solid #ddd; color: var(--text-dark); padding: 7px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 500; white-space: nowrap; transition: all 0.2s; font-family: 'Segoe UI', sans-serif; flex-shrink: 0; }
+        .tab:hover { border-color: var(--primary-blue); color: var(--primary-blue); }
+        .tab.active { background: var(--primary-blue); border-color: var(--primary-blue); color: white; }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px 60px; }
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        /* Carte randonnée */
+        .rando-card { background: white; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 26px 28px; margin-bottom: 24px; }
+        .rando-title { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; }
+
+        /* Stats */
+        .rando-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin-bottom: 16px; }
+        .rando-stat { font-size: 13px; color: var(--text-light); }
+        .rando-stat strong { color: var(--text-dark); }
+
+        /* Badge difficulté */
+        .badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .badge-facile { background: #e6f9f0; color: #1a7a4a; }
+        .badge-moyenne { background: #fff3e0; color: #e65c00; }
+        .badge-difficile { background: #fde8e8; color: #c0392b; }
+
+        footer { background: linear-gradient(135deg, #34BDEF 0%, #2a9ec4 100%); color: white; padding: 35px 20px; text-align: center; margin-top: 40px; }
+        footer p { margin-bottom: 8px; font-size: 14px; }
+        footer a { color: white; text-decoration: none; }
+        footer a:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <a class="back-button" href="randonnees.html">←</a>
+        <h1>Randonnées - Jura</h1>
+    </div>
+</header>
+
+<div class="tabs-wrapper">
+    <div class="tabs-outer">
+        <button class="tab-arrow" onclick="scrollTabs(-1)">‹</button>
+        <div class="tabs-scroll" id="tabsScroll">
+            <div class="tabs" id="tabsRow">
+                <button class="tab active" onclick="showPanel(0)">Molard de Netru</button>
+                <button class="tab" onclick="showPanel(1)">Pic d'Oliferne par le sentier des crêtes</button>
+                <button class="tab" onclick="showPanel(2)">Un tour au Cirque de Vogna</button>
+                <button class="tab" onclick="showPanel(3)">La Quinquenouille et Dramelay</button>
+                <button class="tab" onclick="showPanel(4)">Saint-Romain-de-Roche via Vaulx-lès-Saint-Claude</button>
+                <button class="tab" onclick="showPanel(5)">Le Pas de l'Âne sur la Roche de Lezan</button>
+                <button class="tab" onclick="showPanel(6)">Les reculées de l'Enragé</button>
+            </div>
+        </div>
+        <button class="tab-arrow" onclick="scrollTabs(1)">›</button>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- 0 : Molard de Netru -->
+    <div class="panel active" id="panel-0">
+        <div class="rando-card">
+            <div class="rando-title">Molard de Netru</div>
+            <div class="rando-stats">
+                <div class="rando-stat"><strong>Durée</strong> : 1h20</div>
+                <div class="rando-stat"><strong>Distance</strong> : 3,13 km</div>
+                <div class="rando-stat"><strong>Dénivelé +</strong> : 165 m</div>
+                <div class="rando-stat"><strong>Dénivelé -</strong> : 161 m</div>
+                <div class="rando-stat"><strong>Point haut</strong> : 487 m</div>
+                <div class="rando-stat"><strong>Point bas</strong> : 310 m</div>
+                <div class="rando-stat"><strong>Retour départ</strong> : Oui</div>
+            </div>
+            <span class="badge badge-moyenne">Moyenne</span>
+        </div>
+    </div>
+
+    <!-- 1 : Pic d'Oliferne -->
+    <div class="panel" id="panel-1">
+        <div class="rando-card">
+            <div class="rando-title">Pic d'Oliferne par le sentier des crêtes</div>
+            <div class="rando-stats">
+                <div class="rando-stat"><strong>Durée</strong> : 3h00</div>
+                <div class="rando-stat"><strong>Distance</strong> : 7,99 km</div>
+                <div class="rando-stat"><strong>Dénivelé +</strong> : 264 m</div>
+                <div class="rando-stat"><strong>Dénivelé -</strong> : 268 m</div>
+                <div class="rando-stat"><strong>Point haut</strong> : 790 m</div>
+                <div class="rando-stat"><strong>Point bas</strong> : 591 m</div>
+                <div class="rando-stat"><strong>Retour départ</strong> : Oui</div>
+            </div>
+            <span class="badge badge-moyenne">Moyenne</span>
+        </div>
+    </div>
+
+    <!-- 2 : Cirque de Vogna -->
+    <div class="panel" id="panel-2">
+        <div class="rando-card">
+            <div class="rando-title">Un tour au Cirque de Vogna</div>
+            <div class="rando-stats">
+                <div class="rando-stat"><strong>Durée</strong> : 2h35</div>
+                <div class="rando-stat"><strong>Distance</strong> : 7,50 km</div>
+                <div class="rando-stat"><strong>Dénivelé +</strong> : 168 m</div>
+                <div class="rando-stat"><strong>Dénivelé -</strong> : 176 m</div>
+                <div class="rando-stat"><strong>Point haut</strong> : 663 m</div>
+                <div class="rando-stat"><strong>Point bas</strong> : 483 m</div>
+                <div class="rando-stat"><strong>Retour départ</strong> : Oui</div>
+            </div>
+            <span class="badge badge-facile">Facile</span>
+        </div>
+    </div>
+
+    <!-- 3 : La Quinquenouille et Dramelay -->
+    <div class="panel" id="panel-3">
+        <div class="rando-card">
+            <div class="rando-title">La Quinquenouille et Dramelay</div>
+            <div class="rando-stats">
+                <div class="rando-stat"><strong>Durée</strong> : 3h10</div>
+                <div class="rando-stat"><strong>Distance</strong> : 8,67 km</div>
+                <div class="rando-stat"><strong>Dénivelé +</strong> : 240 m</div>
+                <div class="rando-stat"><strong>Dénivelé -</strong> : 243 m</div>
+                <div class="rando-stat"><strong>Point haut</strong> : 574 m</div>
+                <div class="rando-stat"><strong>Point bas</strong> : 352 m</div>
+                <div class="rando-stat"><strong>Retour départ</strong> : Oui</div>
+            </div>
+            <span class="badge badge-facile">Facile</span>
+        </div>
+    </div>
+
+    <!-- 4 : Saint-Romain-de-Roche -->
+    <div class="panel" id="panel-4">
+        <div class="rando-card">
+            <div class="rando-title">Saint-Romain-de-Roche via Vaulx-lès-Saint-Claude</div>
+            <div class="rando-stats">
+                <div class="rando-stat"><strong>Durée</strong> : 3h05</div>
+                <div class="rando-stat"><strong>Distance</strong> : 6,53 km</div>
+                <div class="rando-stat"><strong>Dénivelé +</strong> : 427 m</div>
+                <div class="rando-stat"><strong>Dénivelé -</strong> : 427 m</div>
+                <div class="rando-stat"><strong>Point haut</strong> : 709 m</div>
+                <div class="rando-stat"><strong>Point bas</strong> : 332 m</div>
+                <div class="rando-stat"><strong>Retour départ</strong> : Oui</div>
+            </div>
+            <span class="badge badge-difficile">Difficile</span>
+        </div>
+    </div>
+
+    <!-- 5 : Pas de l'Âne -->
+    <div class="panel" id="panel-5">
+        <div class="rando-card">
+            <div class="rando-title">Le Pas de l'Âne sur la Roche de Lezan</div>
+            <div class="rando-stats">
+                <div class="rando-stat"><strong>Durée</strong> : 3h05</div>
+                <div class="rando-stat"><strong>Distance</strong> : 8,38 km</div>
+                <div class="rando-stat"><strong>Dénivelé +</strong> : 227 m</div>
+                <div class="rando-stat"><strong>Dénivelé -</strong> : 229 m</div>
+                <div class="rando-stat"><strong>Point haut</strong> : 688 m</div>
+                <div class="rando-stat"><strong>Point bas</strong> : 509 m</div>
+                <div class="rando-stat"><strong>Retour départ</strong> : Oui</div>
+            </div>
+            <span class="badge badge-moyenne">Moyenne</span>
+        </div>
+    </div>
+
+    <!-- 6 : Reculées de l'Enragé -->
+    <div class="panel" id="panel-6">
+        <div class="rando-card">
+            <div class="rando-title">Les reculées de l'Enragé</div>
+            <div class="rando-stats">
+                <div class="rando-stat"><strong>Durée</strong> : 3h25</div>
+                <div class="rando-stat"><strong>Distance</strong> : 8,46 km</div>
+                <div class="rando-stat"><strong>Dénivelé +</strong> : 346 m</div>
+                <div class="rando-stat"><strong>Dénivelé -</strong> : 345 m</div>
+                <div class="rando-stat"><strong>Point haut</strong> : 639 m</div>
+                <div class="rando-stat"><strong>Point bas</strong> : 337 m</div>
+                <div class="rando-stat"><strong>Retour départ</strong> : Oui</div>
+            </div>
+            <span class="badge badge-difficile">Difficile</span>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+    <p><a href="tel:+33474768097">04 74 76 80 97</a> | <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+    <p style="margin-top:15px; opacity:0.8; font-size:12px;">&copy; 2026 Tous droits réservés.</p>
+</footer>
+
+<script>
+    function showPanel(i) {
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById('panel-' + i).classList.add('active');
+        document.querySelectorAll('.tab')[i].classList.add('active');
+        scrollToActiveTab(i);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function scrollToActiveTab(i) {
+        const scroll = document.getElementById('tabsScroll');
+        const tab = document.querySelectorAll('.tab')[i];
+        if (!tab) return;
+        scroll.scrollLeft = tab.offsetLeft - (scroll.offsetWidth / 2) + (tab.offsetWidth / 2);
+    }
+    function scrollTabs(dir) {
+        document.getElementById('tabsScroll').scrollLeft += dir * 200;
+    }
+</script>
+
+</body>
+</html>
