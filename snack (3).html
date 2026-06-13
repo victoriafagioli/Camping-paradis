@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snack - Camping Paradis</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9X0YBNRWMD"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9X0YBNRWMD');</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary-blue:#34BDEF;--accent-orange:#34BDEF;--text-dark:#333;--text-light:#666;--bg-light:#f8f9fa}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:var(--text-dark);line-height:1.6;background:var(--bg-light)}
+header{background:linear-gradient(135deg,#34BDEF 0%,#2a9ec4 100%);color:white;padding:20px 0;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.header-container{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:15px}
+.back-button{background:rgba(255,255,255,.2);border:none;color:white;font-size:24px;cursor:pointer;padding:10px 15px;border-radius:6px}
+header h1{font-size:28px;font-weight:700}
+.container{max-width:1200px;margin:0 auto;padding:40px 20px}
+.detail-image{width:100%;margin:30px 0;border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.15)}
+.detail-image img{width:100%;height:auto;display:block}
+.detail-info h2{font-size:28px;color:#34BDEF;margin-bottom:15px;font-weight:700;margin-top:20px}
+.info-card{background:white;padding:30px;border-radius:12px;border-top:4px solid var(--primary-blue);box-shadow:0 4px 15px rgba(0,0,0,.08);margin-bottom:25px;margin-top:30px}
+.info-card h3{color:var(--primary-blue);margin-bottom:20px;font-size:18px;font-weight:600;text-transform:uppercase}
+.info-item{margin-bottom:15px;display:flex;gap:12px;align-items:flex-start}
+.info-item-icon{color:var(--accent-orange);font-weight:bold;font-size:18px;min-width:20px}
+.info-item-content{flex:1}
+.info-item-label{font-weight:600;color:var(--text-dark);margin-bottom:3px;font-size:14px}
+.info-item-value{color:var(--text-light);font-size:13px}
+.btn-blue{display:inline-block;width:100%;padding:14px 20px;background:linear-gradient(135deg,#34BDEF,#2a9ec4);color:white;font-size:15px;font-weight:700;text-align:center;text-decoration:none;border-radius:10px;margin-top:10px;letter-spacing:0.5px;transition:opacity .2s}
+.btn-blue:hover{opacity:.9}
+.btn-blue+.btn-blue{margin-top:10px}
+
+/* Lightbox */
+.lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.lightbox-overlay.active{display:flex}
+.lightbox-inner{position:relative;max-width:500px;width:100%}
+.lightbox-inner img{width:100%;border-radius:12px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.lightbox-close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;background:white;border:none;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.3);color:#333}
+
+footer{background:linear-gradient(135deg,#34BDEF 0%,#2a9ec4 100%);color:white;padding:40px 20px;text-align:center;margin-top:40px}
+footer p{margin-bottom:10px;font-size:14px}
+footer a{color:white;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <button class="back-button" onclick="window.location.href='index.html'">←</button>
+    <h1>Snack</h1>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="detail-image">
+    <img src="images/snack.jpg" alt="Notre snack" onerror="this.parentElement.style.display='none'">
+  </div>
+
+  <div class="detail-info">
+    <h2>Snack</h2>
+  </div>
+
+  <div class="info-card">
+    <h3>🍕 Notre Snack</h3>
+    <div class="info-item">
+      <div class="info-item-icon">✓</div>
+      <div class="info-item-content">
+        <div class="info-item-label">Ouverture</div>
+        <div class="info-item-value">Tous les jours sauf le mercredi — du 15 juin au 31 août 2025</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-icon">✓</div>
+      <div class="info-item-content">
+        <div class="info-item-label">À la carte</div>
+        <div class="info-item-value">Pizzas, panini, planches à partager et bien d'autres plats du jour</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-icon">✓</div>
+      <div class="info-item-content">
+        <div class="info-item-label">Réservation</div>
+        <div class="info-item-value">Sans réservation, sauf pour les soirées à thème</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <h3>🌙 Soirées à Thème</h3>
+    <div class="info-item">
+      <div class="info-item-icon">🦪</div>
+      <div class="info-item-content">
+        <div class="info-item-label">Soirée moules frites — tous les mardis</div>
+        <div class="info-item-value">À partir de 20h30</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-icon">🥘</div>
+      <div class="info-item-content">
+        <div class="info-item-label">Soirée paëlla — tous les dimanches</div>
+        <div class="info-item-value">À partir de 20h30</div>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-icon">🔥</div>
+      <div class="info-item-content">
+        <div class="info-item-label">Soirée barbecue + frites à volonté — tous les jeudis</div>
+        <div class="info-item-value">À partir de 19h00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <h3>🌟 Paradis des Stars</h3>
+    <div class="info-item">
+      <div class="info-item-icon">✓</div>
+      <div class="info-item-content">
+        <div class="info-item-label">Spectacles & concerts en haute saison</div>
+        <div class="info-item-value">Avec plus de 30 artistes, le Paradis des Stars est l'événement de l'été : comédies musicales, Boys Band, Girls Band, chanteurs issus des émissions TV… des artistes que vous avez vus à la télé ou entendus à la radio !</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <h3>🔗 Accès Rapide</h3>
+    <a href="horaires.html" class="btn-blue" onclick="document.getElementById('lightbox').classList.add('active');return false;">HORAIRES BAR / SNACK</a>
+    <a href="carte-snack.html" class="btn-blue">CARTE BAR / SNACK</a>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>Camping Paradis - Les Gorges du Haut Bugey</strong></p>
+  <p>📞 <a href="tel:+33474768097">04 74 76 80 97</a> | 📧 <a href="mailto:info@camping-lesgorgesduhautbugey.fr">info@camping-lesgorgesduhautbugey.fr</a></p>
+  <p style="margin-top:15px;opacity:.8;font-size:12px">&copy; 2026 Tous droits réservés.</p>
+</footer>
+
+<!-- Lightbox horaires -->
+<div class="lightbox-overlay" id="lightbox" onclick="this.classList.remove('active')">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('active')">✕</button>
+    <img src="images/horaires-bar.jpg" alt="Horaires d'ouverture Bar / Snack">
+  </div>
+</div>
+
+</body>
+</html>
